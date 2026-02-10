@@ -4,13 +4,11 @@ The king is the most valuable piece and the most vulnerable. Castling is how you
 
 ---
 
-## The Immune Response
+## One Move, Two Things
 
-When your body detects a threat, it doesn't wait for the disease to take over. It reorganizes. White blood cells mobilize. Temperature rises. Resources redirect to the point of danger. The body restructures itself to survive.
+Castling is the only move in chess where two pieces move at once. The king slides two squares toward the rook. The rook jumps over the king to the other side. In one move, you've done two things: tucked your king into safety and activated your rook.
 
-Castling does the same thing. Your king is in the center. The center is about to become a battleground — pieces flying, files opening, tactics everywhere. The king doesn't belong there.
-
-So you castle. One move. The king tucks behind a wall of pawns. The rook jumps to the center where it's useful. You've gone from exposed to protected in a single breath.
+That's why castling is so powerful. Every other move in chess is a choice — improve THIS piece or improve THAT piece. Castling improves both. You don't have to pick.
 
 ```
 BEFORE CASTLING:
@@ -32,20 +30,20 @@ AFTER CASTLING:
 KINGSIDE CASTLING (short):
   Safer. King is behind three pawns.
   More common. Less risk.
-  The standard immune response — tested, reliable, proven.
+  The solid choice — tested, reliable, proven.
 
 QUEENSIDE CASTLING (long):
   Riskier. King is slightly more exposed.
   But the rook goes to the center file.
   More aggressive. More dynamic.
-  The creative immune response — unconventional but powerful.
+  The bold choice — less common, but your rook is already fighting.
 ```
 
 Which side you castle determines the character of the game. Kingside castling says: "I'm safe, let's play." Queenside castling says: "I'm safe-ish, but my rook is already in the fight."
 
 When both players castle on the same side, the game is structural. Slow. Maneuvering.
 
-When they castle on opposite sides, the game is a race. Both players storm the pawns in front of the opposing king. It's an arms race — who breaks through first wins. Those games are violent and decisive.
+When they castle on opposite sides, the game is a race. Both players storm the pawns in front of the opposing king. Who breaks through first wins. Those games are violent and decisive.
 
 ---
 
@@ -62,7 +60,7 @@ UNCASTLED KING:
   because the king is in the crossfire.
 ```
 
-The longer you wait, the more vulnerable you become. Every move without castling is a move where your opponent could open the center and catch your king exposed. It's playing without an immune system. Everything feels fine until the first infection — and then it's catastrophic.
+The longer you wait, the more vulnerable you become. Every move without castling is a move where your opponent could open the center and catch your king exposed. It's driving without a seatbelt. Everything feels fine until the first crash.
 
 ---
 
@@ -81,14 +79,14 @@ BREAKING YOUR OWN CASTLE:
   Calculated risk.
   Creates weaknesses in YOUR position.
   But also creates attacking chances.
-  The immune system allows a controlled fever
-  to fight a bigger infection.
+  You accept a small danger now
+  to create a bigger threat for them.
 ```
 
 Knowing when to keep your castle solid and when to break it for an attack is one of the hardest judgments in chess. Too solid and you're a fortress with no army. Too open and you're an army with no fortress.
 
 ---
 
-*Castling is the body's immune response — restructuring everything in one move to protect what matters most. But even the best defense needs to know when to attack.*
+*Castling restructures everything in one move — protecting the king while activating the rook. But even the best defense needs to know when to attack.*
 
 *For the full philosophy: [chimera-framework](https://github.com/DrealR/chimera-framework)*

@@ -10,9 +10,11 @@ Nobody talks about the middlegame. The moment where your preparation runs out an
 
 ---
 
+Three principles: give more than you take, pause before you commit, and don't force what isn't there.
+
 **L = (O > I) + P + ¬F**
 
-**Develop the board, not just your favorite piece.** The best move improves the WHOLE position. A sacrifice that opens lines is giving material to gain something more valuable — space, time, initiative. Give a pawn, gain a position. That's not losing. That's love.
+**Develop the board, not just your favorite piece.** The best move improves the WHOLE position. A sacrifice that opens lines is giving material to gain something more valuable — space, time, initiative. Give a pawn, gain a position. That's not losing. That's investing.
 
 **Pause before you move.** Hand hovering over the piece. You haven't committed yet. Calculate. Visualize. See the board three moves ahead, not just the next move. The pause isn't slow play. It's intelligence.
 

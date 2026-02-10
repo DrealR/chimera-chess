@@ -37,9 +37,9 @@ The pawns are the smallest, and they shape everything.
 
 ## Survival
 
-There's an organism called a tardigrade. Microscopic. Nearly invisible. It survives everything — radiation, vacuum, boiling water, freezing temperatures. Scientists can't kill it. It just... endures. When conditions get bad, it curls up into a ball and waits. When conditions improve, it unfolds and keeps going.
+Pawns can't retreat. Can't move sideways. Can't do anything flashy. They only go forward, one square at a time. Every other piece on the board can outrun them, outmaneuver them, jump over them.
 
-Pawns survive like that. They can't retreat, can't move sideways, can't do anything flashy. But they endure. They hold the line. They protect each other in chains. And if one of them survives long enough to reach the other side of the board?
+And yet pawns survive. They endure. They hold the line. They protect each other in chains. And if one of them survives long enough to reach the other side of the board?
 
 It becomes a queen.
 
