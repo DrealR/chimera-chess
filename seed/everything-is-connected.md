@@ -4,9 +4,9 @@ The board is alive.
 
 Two players, thirty-two pieces, sixty-four squares. Everything that happens is one of three things: opening, middlegame, or endgame. That's it. Every game, every tournament, every era of chess history — those three phases. Over and over.
 
-The middlegame is where games are won.
+The middlegame is where most games are decided.
 
-Nobody talks about the middlegame enough. The moment where your preparation runs out and you have to THINK for yourself. Where theory ends and you begin. Where there's no book telling you the right move, just you and the position and whatever you can see. That moment IS the game. The players who master the middlegame master chess. Everything else is memorization.
+The opening has theory. The endgame has technique. The middlegame is where your preparation runs out and you have to THINK for yourself. Where there's no book telling you the right move, just you and the position and whatever you can see. Opening knowledge and endgame skill both matter — but the middlegame is where you're most on your own.
 
 ---
 
@@ -20,7 +20,7 @@ Three principles: give more than you take, pause before you commit, and don't fo
 
 ---
 
-Every game starts the same. Same pieces, same squares, same rules. Infinite games happen from the same starting position. Choices make the difference. Your opponent shows you blind spots you didn't know you had. Masters study their losses more than their wins. The opponent isn't the enemy. The opponent is the teacher.
+Every game starts the same. Same pieces, same squares, same rules. Infinite games happen from the same starting position. Choices make the difference. Your opponent shows you blind spots you didn't know you had. Masters study their losses more than their wins — not to learn what the opponent did right, but to see what they themselves missed.
 
 ---
 

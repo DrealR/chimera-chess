@@ -26,18 +26,18 @@ The power isn't in either target. It's in the square your knight occupies — th
 
 ---
 
-## Every Tactic is a Fork
+## Why Tactics Work
 
-Look at any chess tactic and you'll find the same structure: one action creating two problems.
+A fork is one piece creating two problems. But every tactic shares something with that idea — they all work by giving the opponent more problems than they can handle in one move.
 
 ```
-FORK:     One piece attacks two pieces.
-PIN:      One piece restricts two pieces (pinned + piece behind).
-SKEWER:   One piece forces two concessions (move the front, lose the back).
-DISCOVER: One move creates two threats (the piece that moved + the piece revealed).
+FORK:      One piece attacks two pieces.
+PIN:       One piece paralyzes another (can't move without exposing what's behind).
+SKEWER:    One piece forces a choice (move the front piece, lose the back).
+DISCOVERY: One move reveals a second attack (the piece that moved + the piece behind it).
 ```
 
-Every tactic is: do one thing, create two problems. The opponent can solve one. They can't solve both. The advantage comes from the gap between the two problems — the space where their attention can't reach.
+A pin isn't a fork. A skewer isn't a fork. They're different patterns with different setups and different defenses. But they all exploit the same thing: your opponent only gets one move per turn. Create two threats, and one of them gets through.
 
 ---
 
