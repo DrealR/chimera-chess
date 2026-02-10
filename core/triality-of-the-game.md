@@ -1,18 +1,18 @@
-# Triality of the Game
+# Three Phases
 
 Every chess game moves through three phases.
 
 ```
 ┌──────────┐
-│ OPENING  │  ← Pole A: Theory, preparation, the known
+│ OPENING  │  Theory, preparation, the known
 └────┬─────┘
      │
 ┌────┴───────────┐
-│  MIDDLEGAME    │  ← The Between
+│  MIDDLEGAME    │  The moment between them
 └────┬───────────┘
      │
 ┌────┴─────┐
-│ ENDGAME  │  ← Pole B: Technique, precision, the known
+│ ENDGAME  │  Technique, precision, the known
 └──────────┘
 ```
 
@@ -76,8 +76,8 @@ The player who recognizes the transition first has the advantage. Always.
 
 Once you see the three phases, you see them in every game.
 
-| Scale | Pole A | The Between | Pole B |
-|-------|--------|-------------|--------|
+| Scale | One Side | The Middle | Other Side |
+|-------|----------|------------|------------|
 | Tournament | Early rounds | Pivotal round | Final rounds |
 | Match | Opening | Middlegame | Endgame |
 | Sequence | Your plan | The collision | Their plan |
@@ -88,6 +88,6 @@ Same pattern at every level. The thing in the middle — the transition, the unn
 
 ---
 
-*The opening-endgame split is how beginners see chess. The triality is how the game actually works.*
+*The opening-endgame split is how beginners see chess. Three phases — with the middle being the most important — is how the game actually works.*
 
 *For the full philosophy: [chimera-framework](https://github.com/DrealR/chimera-framework)*

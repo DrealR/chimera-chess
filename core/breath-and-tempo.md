@@ -67,22 +67,22 @@ Different time controls are different rhythms.
 BULLET (1 minute):
   All exhale. No pause. Instinct only.
   Your hands move before your brain finishes thinking.
-  Pure Layer 1 — muscle memory, pattern recognition.
+  Pure muscle memory and pattern recognition.
 
 BLITZ (3-5 minutes):
   Fast breathing. Short pauses.
   You see the pattern, you verify for one second, you play.
-  Layer 1 leads, Layer 2 checks.
+  Instinct leads, calculation checks.
 
 RAPID (10-15 minutes):
   Normal breathing. Real pauses.
   You can actually think. You can actually plan.
-  Layer 1 and Layer 2 working together.
+  Instinct and calculation working together.
 
 CLASSICAL (60+ minutes):
   Deep breathing. Long pauses. Full calculation.
   You see everything. You consider everything.
-  Layer 2 leads, Layer 1 supports.
+  Calculation leads, instinct supports.
 ```
 
 The player who matches their breathing to the time control wins. Playing bullet like classical — overthinking every move — kills you on time. Playing classical like bullet — moving on instinct when you have time to calculate — wastes your advantage.
