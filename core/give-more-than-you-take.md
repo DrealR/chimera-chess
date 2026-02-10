@@ -8,7 +8,7 @@ The best move doesn't always win material.
 
 You give up a pawn. Your opponent is happy — they're a pawn up. But now your bishop has an open diagonal. Your rook has an open file. Your pieces are alive and theirs are stuck defending a pawn they wish they'd never taken.
 
-That's not losing. That's investing.
+That's not losing. That's investing. Tal made a career of this — sacrificing pieces that looked insane on the surface, then proving the activity and initiative were worth more than the material.
 
 ```
 WHAT YOU GAVE:    One pawn (material)
@@ -26,7 +26,7 @@ The player counting material thinks they're winning. The player counting positio
 
 In the opening, every move matters. Every move either develops a piece, controls the center, or wastes time. Taking a free pawn that costs you two moves of development is a terrible trade — you gained a point of material and lost an eternity of time.
 
-The best openings aren't about grabbing stuff. They're about getting your pieces to good squares, fast. Give the board to your pieces. Let them breathe. A fully developed position with no extra material is worth more than an extra pawn with pieces stuck on the back rank.
+The best openings aren't about grabbing stuff. They're about getting your pieces to good squares, fast. Morphy understood this 170 years ago — he'd sacrifice pawns and even pieces just to get his army out first. His opponents would sit there counting material while Morphy's fully developed pieces swarmed the board. A fully developed position with no extra material is worth more than an extra pawn with pieces stuck on the back rank.
 
 ```
 MATERIAL THINKING:
@@ -81,5 +81,3 @@ LISTENING:
 ---
 
 *The best move improves the whole position. Not just your favorite piece. Not just the attack you want. The WHOLE board.*
-
-*For the full philosophy: [chimera-framework](https://github.com/DrealR/chimera-framework)*

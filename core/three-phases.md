@@ -84,10 +84,8 @@ Once you see the three phases, you see them in every game.
 | Move | Candidates | Calculation | Chosen move |
 | Piece | Where it is | The path | Where it should be |
 
-Same pattern at every level. The thing in the middle — the transition, the unnamed moment — is always where the real chess happens.
+Same pattern at every level. The thing in the middle — the transition, the critical shift — is always where the real chess happens.
 
 ---
 
 *The opening-endgame split is how beginners see chess. Three phases — with the middle being the most important — is how the game actually works.*
-
-*For the full philosophy: [chimera-framework](https://github.com/DrealR/chimera-framework)*

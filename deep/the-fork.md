@@ -67,16 +67,6 @@ This is what ten thousand hours looks like. Not better calculation. Better SEEIN
 
 ---
 
-## The Double Attack in Life
-
-The fork isn't just chess. It's any situation where one action solves two problems.
-
-Studying chess improves your decision-making AND gives you a hobby. One action, two benefits. Working out improves your health AND your mood. A good conversation teaches you something AND deepens a relationship.
-
-The fork is about efficiency. The most powerful actions are the ones that serve multiple purposes simultaneously. One move that does one thing is fine. One move that does two things is a fork. One move that does three things is a masterpiece.
-
----
-
 ## The Setup
 
 Forks don't happen randomly. The master CREATES the conditions. Three moves before the fork, they're maneuvering. Placing pieces on specific squares. Trading one piece to open a line. Pushing a pawn to create a weakness. Then — fork. It looks sudden. It was planned.
@@ -97,5 +87,3 @@ CREATED FORK:
 ---
 
 *One piece. Two targets. One move. The power is in the space between the targets — the square that threatens everything at once.*
-
-*For the full philosophy: [chimera-framework](https://github.com/DrealR/chimera-framework)*

@@ -96,5 +96,3 @@ Knowing WHEN to trade the queen is knowing when the game needs to change charact
 ---
 
 *The queen adapts to any position, speaks any language, and threatens everything. But her power depends entirely on timing and context.*
-
-*For the full philosophy: [chimera-framework](https://github.com/DrealR/chimera-framework)*

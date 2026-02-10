@@ -92,8 +92,6 @@ A KNIGHT COORDINATING WITH A BISHOP:
 
 When pieces coordinate — when the space between them hums with combined influence — the whole position comes alive. When pieces are disconnected — isolated, uncoordinated, each doing their own thing — the position is dead.
 
-Sound like a basketball team?
-
 ---
 
 ## The Greatest Players
@@ -107,5 +105,3 @@ That's not defense. That's not offense. It's something in between.
 ---
 
 *The power is never in one piece or another. It's in the relationship between them. Master the spaces and you master chess.*
-
-*For the full philosophy: [chimera-framework](https://github.com/DrealR/chimera-framework)*

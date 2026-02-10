@@ -1,19 +1,17 @@
 # CHIMERA × Chess
 
-**L = (O > I) + P + ¬F**
+A different way to see the game.
 
-Every position is a choice. Chess through the CHIMERA lens.
+Give more than you take. Pause before you act. Don't force what isn't there.
 
 ---
 
 Start with `seed/` — one document, one idea.
-Then `core/` — the framework applied.
-Then `deep/` — where it gets interesting.
+Then `core/` — the principles at work.
+Then `deep/` — where it gets specific.
 
 Or clone this repo, feed it to your AI, and ask questions.
 
-For the full philosophy: [github.com/DrealR/chimera-framework](https://github.com/DrealR/chimera-framework)
-
 ---
 
-*Part of the CHIMERA family of repos. Same truth, different lens.*
+Part of a larger framework for seeing systems clearly: [chimera-framework](https://github.com/DrealR/chimera-framework)

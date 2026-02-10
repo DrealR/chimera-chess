@@ -63,7 +63,7 @@ PAWN CHAIN:
   Strength.
 ```
 
-The lesson: individuals who protect each other don't need outside help. The chain sustains itself. Every pawn in the chain is small, but the structure they form together is unbreakable.
+Pawns that protect each other don't need pieces to babysit them. The chain sustains itself. Every pawn in the chain is small, but the structure they form together is unbreakable.
 
 ---
 
@@ -92,6 +92,4 @@ Every chess endgame is a pawn story. The pieces were the spectacle. The pawns ar
 
 ---
 
-*The smallest piece shapes the board, survives everything, and has the potential to become the most powerful piece in the game. Don't underestimate what starts small.*
-
-*For the full philosophy: [chimera-framework](https://github.com/DrealR/chimera-framework)*
+*The smallest piece shapes the board, survives everything, and has the potential to become the most powerful piece in the game.*

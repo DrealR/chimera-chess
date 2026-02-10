@@ -50,7 +50,7 @@ That last part is the key. Zugzwang isn't an attack. Nobody is threatening check
 
 ## The Lesson
 
-Sometimes the best move is no move. But life doesn't always let you pass. Systems don't let you sit still. The clock is ticking. The move must be made.
+Sometimes the best move is no move. But chess doesn't let you pass. The clock is ticking. The move must be made.
 
 When you're forced to act and every action hurts:
 
@@ -97,5 +97,3 @@ Sometimes the most powerful thing you can do is make the other person act.
 ---
 
 *Zugzwang: when every action makes things worse, but inaction isn't allowed. The game forces your hand. What you do with a forced hand defines you as a player.*
-
-*For the full philosophy: [chimera-framework](https://github.com/DrealR/chimera-framework)*

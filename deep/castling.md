@@ -88,5 +88,3 @@ Knowing when to keep your castle solid and when to break it for an attack is one
 ---
 
 *Castling restructures everything in one move — protecting the king while activating the rook. But even the best defense needs to know when to attack.*
-
-*For the full philosophy: [chimera-framework](https://github.com/DrealR/chimera-framework)*

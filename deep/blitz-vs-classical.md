@@ -67,7 +67,7 @@ ONLY BLITZ:
   You play the first move that looks good.
   Sometimes it IS good. Sometimes it's a blunder
   that a little calculation would have caught.
-  You plateu because you never go deeper.
+  You plateau because you never go deeper.
 
 ONLY CLASSICAL:
   Deep understanding, slow hands.
@@ -119,5 +119,3 @@ The growth is always in the uncomfortable direction. The blitz player needs to s
 ---
 
 *Same game. Two speeds. The master plays both because mastery isn't fast or deep. It's the place where fast and deep meet.*
-
-*For the full philosophy: [chimera-framework](https://github.com/DrealR/chimera-framework)*

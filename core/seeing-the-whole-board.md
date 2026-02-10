@@ -101,5 +101,3 @@ That's what "seeing the whole board" actually means. Not seeing every square. Se
 ---
 
 *The board is 64 squares. You're looking at 8. Zoom out. The answer is in the squares you're not watching.*
-
-*For the full philosophy: [chimera-framework](https://github.com/DrealR/chimera-framework)*
