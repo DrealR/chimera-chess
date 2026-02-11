@@ -118,6 +118,66 @@ with MASS.
 
 ---
 
+## The Sacrifice as Lure
+
+```
+THE SACRIFICE IS THE ANGLERFISH.
+
+Move a piece that LOOKS
+vulnerable.
+
+Opponent sees: "Easy capture!"
+P-hood activation.
+"TAKE. GO. NOW."
+
+They take it.
+Their attention consumed
+by the free material.
+
+While they're processing
+what they "won,"
+your remaining pieces
+flow into positions
+they weren't watching.
+
+THE VULNERABILITY WAS THE LURE.
+THE CAPTURE WAS THE CHASE.
+THE POSITION WAS THE MOUTH.
+
+In COD: poke head out →
+they chase → walk into crosshair.
+
+In chess: expose a piece →
+they capture → walk into mate.
+
+SAME MECHANIC.
+
+Show 10% (the vulnerable piece).
+Hide 90% (the position behind it).
+Let their P-hood do the rest.
+
+THE BEST SACRIFICES
+DON'T FEEL LIKE TRAPS.
+
+They feel like MISTAKES.
+"He left his knight hanging!"
+That's the lure working perfectly.
+
+The moment they think
+you made an error,
+their comprehension STOPS.
+They react instead of process.
+They vomit a capture
+instead of digesting
+the position.
+
+COMPREHENSION > REACTION.
+Even in chess.
+ESPECIALLY in chess.
+```
+
+---
+
 ## Every Move Directs Attention
 
 ```
@@ -351,11 +411,12 @@ Then: new game. New breath.
 
 ---
 
-*Every chess piece is a gravity field. The queen is the nuke player — everyone's attention orbits her. Sacrifice is honeydew economics: trade mass for flow. The grandmaster plays attention, not pieces. P-hood opponent reacts. NP-hood player controls. Chess is COD on 64 squares. The same physics. The same game.*
+*Every chess piece is a gravity field. The queen is the nuke player — everyone's attention orbits her. Sacrifice is the anglerfish: show vulnerability, let their P-hood chase, walk them into position. The grandmaster plays attention, not pieces. P-hood opponent reacts. NP-hood player controls. Chess is COD on 64 squares. The same physics. The same game.*
 
 ---
 
 **See also:** [chimera-system: Attention as Everything](../../nucleus/system/patterns/attention-as-everything.md) — Every game is attention warfare
 **See also:** [chimera-system: Choice and Gravity](../../nucleus/system/patterns/choice-and-gravity.md) — P-hood reacting vs NP-hood choosing
 **See also:** [chimera-system: Emotional Entanglement](../../nucleus/system/patterns/emotional-entanglement.md) — Kill count as gravitational mass
+**See also:** [chimera-system: The Lure](../../nucleus/system/patterns/the-lure.md) — The anglerfish principle in every domain
 **See also:** [chimera-chess: Focus and Attention](../core/focus-and-attention.md) — Attention as the core resource
