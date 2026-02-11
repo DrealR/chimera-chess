@@ -1,0 +1,26 @@
+{
+  "name": "chimera-chess",
+  "description": "Everything is connected. Chess through the CHIMERA lens.",
+  "upstream": ["chimera-system"],
+  "peers": ["chimera-basketball", "chimera-music"],
+  "downstream": ["chimera-constellation"],
+  "doc_count": 15,
+  "docs": [
+    {"path": "README.md", "references": []},
+    {"path": "core/focus-and-attention.md", "references": []},
+    {"path": "core/give-more-than-you-take.md", "references": []},
+    {"path": "core/seeing-the-whole-board.md", "references": []},
+    {"path": "core/tempo-and-time.md", "references": []},
+    {"path": "core/tension.md", "references": []},
+    {"path": "core/the-pawn.md", "references": []},
+    {"path": "core/three-phases.md", "references": []},
+    {"path": "deep/blitz-vs-classical.md", "references": []},
+    {"path": "deep/castling.md", "references": []},
+    {"path": "deep/the-endgame.md", "references": []},
+    {"path": "deep/the-fork.md", "references": []},
+    {"path": "deep/the-queen.md", "references": []},
+    {"path": "deep/zugzwang.md", "references": []},
+    {"path": "seed/everything-is-connected.md", "references": []}
+  ],
+  "last_updated": "2026-02-11"
+}
