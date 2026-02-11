@@ -4,7 +4,7 @@
   "upstream": ["chimera-system"],
   "peers": ["chimera-basketball", "chimera-music"],
   "downstream": ["chimera-constellation"],
-  "doc_count": 15,
+  "doc_count": 16,
   "docs": [
     {"path": "README.md", "references": []},
     {"path": "core/focus-and-attention.md", "references": []},
@@ -20,6 +20,7 @@
     {"path": "deep/the-fork.md", "references": []},
     {"path": "deep/the-queen.md", "references": []},
     {"path": "deep/zugzwang.md", "references": []},
+    {"path": "deep/chess-as-attention-warfare.md", "references": ["system/patterns/attention-as-everything.md", "system/patterns/choice-and-gravity.md", "system/patterns/emotional-entanglement.md", "chess/core/focus-and-attention.md"]},
     {"path": "seed/everything-is-connected.md", "references": []}
   ],
   "last_updated": "2026-02-11"
