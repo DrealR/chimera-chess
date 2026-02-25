@@ -37,3 +37,14 @@ core/   three phases, tempo, tension, sacrifice,
 deep/   the fork, zugzwang, blitz vs classical,
         the queen, the endgame, castling
 ```
+
+---
+
+## The App
+
+Interactive influence map and teaching tool. Built with Next.js + TypeScript + Tailwind CSS.
+
+```bash
+npm install
+npm run dev    # http://localhost:3000
+```
