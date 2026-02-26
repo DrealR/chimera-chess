@@ -37,8 +37,12 @@ describe('play page', () => {
       expect(screen.getByText(/white to move/i)).toBeTruthy();
     }, { timeout: 2000 });
 
-    await user.click(screen.getByRole('button', { name: /influence/i }));
+    // Influence is ON by default — glows should already be present
     expect(container.querySelectorAll('.influence-glow').length).toBeGreaterThan(0);
+
+    // Click to turn OFF
+    await user.click(screen.getByRole('button', { name: /influence/i }));
+    expect(container.querySelectorAll('.influence-glow').length).toBe(0);
 
     await user.click(screen.getByRole('button', { name: /cheat code/i }));
     expect(screen.getByText(/look/i)).toBeTruthy();

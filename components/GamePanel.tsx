@@ -2,6 +2,7 @@
 
 import type { GameState } from '@/lib/chess';
 import type { Piece } from '@/lib/types';
+import type { Difficulty } from '@/lib/ai';
 import { randomInsight } from '@/lib/insights';
 import { useState, useMemo } from 'react';
 import { MiniPiece } from './ChessPiece';
@@ -15,6 +16,8 @@ type GamePanelProps = {
   onToggleProtocol: () => void;
   onNewGame: () => void;
   onResign: () => void;
+  difficulty: Difficulty;
+  onDifficultyChange: (d: Difficulty) => void;
 };
 
 const PIECE_ORDER: Record<string, number> = { Q: 0, R: 1, B: 2, N: 3, P: 4 };
@@ -32,6 +35,8 @@ export default function GamePanel({
   onToggleProtocol,
   onNewGame,
   onResign,
+  difficulty,
+  onDifficultyChange,
 }: GamePanelProps) {
   const [insight] = useState(() => randomInsight());
 
@@ -147,6 +152,25 @@ export default function GamePanel({
       {/* Insight */}
       <div className="text-xs italic leading-relaxed" style={{ color: '#444' }}>
         &ldquo;{insight.text}&rdquo;
+      </div>
+
+      {/* Difficulty */}
+      <div>
+        <div className="text-[0.6rem] uppercase tracking-widest mb-2" style={{ color: '#444' }}>
+          Difficulty
+        </div>
+        <div className="flex gap-3 text-xs">
+          {(['easy', 'medium', 'hard'] as const).map((d) => (
+            <button
+              key={d}
+              className="transition-colors capitalize"
+              style={{ color: difficulty === d ? '#c8956c' : '#444' }}
+              onClick={() => onDifficultyChange(d)}
+            >
+              {d}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Actions */}

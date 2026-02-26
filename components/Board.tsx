@@ -20,6 +20,7 @@ type BoardProps = {
   checkSquare?: [number, number] | null;
   selectedSquare?: [number, number] | null;
   flashSquare?: [number, number] | null;
+  showInfluence?: boolean;
 };
 
 /** Soft watercolor-wash influence style */
@@ -68,8 +69,10 @@ function getInfluenceStyle(
     return { background: `radial-gradient(circle, rgba(160,120,200,${a}) 0%, rgba(160,120,200,${a * 0.25}) 70%, transparent 100%)` };
   }
 
-  // 'both' mode
-  if (w === 0 && b === 0) return {};
+  // 'both' mode — four zones: blue (white), red (black), green (safe), purple (contested)
+  if (w === 0 && b === 0) {
+    return { background: 'radial-gradient(circle, rgba(80,180,100,0.10) 0%, rgba(80,180,100,0.03) 70%, transparent 100%)' };
+  }
   if (w > 0 && b === 0) {
     const a = Math.min(0.12 + 0.1 * w, 0.55);
     return { background: `radial-gradient(circle, rgba(100,160,240,${a}) 0%, rgba(100,160,240,${a * 0.25}) 70%, transparent 100%)` };
@@ -96,6 +99,7 @@ export default function Board({
   checkSquare,
   selectedSquare,
   flashSquare,
+  showInfluence = true,
 }: BoardProps) {
   const [hoveredSquare, setHoveredSquare] = useState<[number, number] | null>(null);
 
@@ -143,7 +147,7 @@ export default function Board({
               const col = i % 8;
               const isLight = (row + col) % 2 === 0;
               const piece = board[row][col];
-              const influenceStyle = getInfluenceStyle(row, col, influence, viewMode, highlightedSquares, highlightedPiecePos);
+              const influenceStyle = showInfluence ? getInfluenceStyle(row, col, influence, viewMode, highlightedSquares, highlightedPiecePos) : {};
               const hasInfluence = Object.keys(influenceStyle).length > 0;
               const isHovered = hoveredSquare?.[0] === row && hoveredSquare?.[1] === col;
               const isHighlightedPiece = highlightedPiecePos?.[0] === row && highlightedPiecePos?.[1] === col;
@@ -258,6 +262,16 @@ export default function Board({
           <span>&nbsp;</span>
         )}
       </div>
+
+      {/* Influence legend */}
+      {showInfluence && (
+        <div className="flex gap-3 text-[0.55rem] font-mono px-1" style={{ color: '#555' }}>
+          <span><span style={{ color: '#64a0f0' }}>{'\u25CF'}</span> Your territory</span>
+          <span><span style={{ color: '#dc5a5a' }}>{'\u25CF'}</span> Opponent</span>
+          <span><span style={{ color: '#50b464' }}>{'\u25CF'}</span> Safe passage</span>
+          <span><span style={{ color: '#a078c8' }}>{'\u25CF'}</span> Contested</span>
+        </div>
+      )}
     </div>
   );
 }

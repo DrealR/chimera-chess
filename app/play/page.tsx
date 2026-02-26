@@ -7,31 +7,24 @@ import {
   getLegalMovesFrom,
   makeMove,
   moveToNotation,
-  getRandomMove,
 } from '@/lib/chess';
+import { getBestMove, type Difficulty } from '@/lib/ai';
 import type { GameState } from '@/lib/chess';
 import Board from '@/components/Board';
 import GamePanel from '@/components/GamePanel';
 
-function createEmptyInfluence() {
-  const grid = () => Array.from({ length: 8 }, () => Array<number>(8).fill(0));
-  return { white: grid(), black: grid() };
-}
-
 export default function PlayPage() {
   const [game, setGame] = useState<GameState>(() => createInitialGame());
   const [selected, setSelected] = useState<[number, number] | null>(null);
-  const [showInfluence, setShowInfluence] = useState(false);
+  const [showInfluence, setShowInfluence] = useState(true);
   const [showProtocol, setShowProtocol] = useState(false);
+  const [difficulty, setDifficulty] = useState<Difficulty>('medium');
   const [history, setHistory] = useState<{ state: GameState; notation: string }[]>([]);
   const [flashSquare, setFlashSquare] = useState<[number, number] | null>(null);
   const aiTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const flashTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const influence = useMemo(
-    () => (showInfluence ? calculateInfluence(game.board) : createEmptyInfluence()),
-    [game.board, showInfluence],
-  );
+  const influence = useMemo(() => calculateInfluence(game.board), [game.board]);
 
   const legalMovesForSelected = useMemo(() => {
     if (!selected) return [];
@@ -76,7 +69,7 @@ export default function PlayPage() {
   useEffect(() => {
     if (game.turn === 'b' && !gameOver) {
       aiTimeout.current = setTimeout(() => {
-        const aiMove = getRandomMove(game);
+        const aiMove = getBestMove(game, difficulty);
         if (aiMove) {
           const notation = moveToNotation(game, aiMove);
           const captureSquare = getCaptureSquare(aiMove);
@@ -91,7 +84,7 @@ export default function PlayPage() {
     return () => {
       if (aiTimeout.current) clearTimeout(aiTimeout.current);
     };
-  }, [game, gameOver, triggerFlash, getCaptureSquare]);
+  }, [game, gameOver, difficulty, triggerFlash, getCaptureSquare]);
 
   const handleSquareClick = useCallback(
     (row: number, col: number) => {
@@ -155,7 +148,7 @@ export default function PlayPage() {
             <Board
               board={game.board}
               influence={influence}
-              viewMode={showInfluence ? 'both' : 'both'}
+              viewMode="both"
               highlightedSquares={null}
               highlightedPiecePos={null}
               showLabels={true}
@@ -166,6 +159,7 @@ export default function PlayPage() {
               checkSquare={checkSquare}
               selectedSquare={selected}
               flashSquare={flashSquare}
+              showInfluence={showInfluence}
             />
           </div>
 
@@ -180,6 +174,8 @@ export default function PlayPage() {
               onToggleProtocol={() => setShowProtocol((p) => !p)}
               onNewGame={handleNewGame}
               onResign={handleResign}
+              difficulty={difficulty}
+              onDifficultyChange={setDifficulty}
             />
           </div>
         </div>
