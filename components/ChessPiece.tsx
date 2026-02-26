@@ -94,10 +94,14 @@ export default function ChessPiece({ type, color, isSelected, className }: Chess
   const fill = FILLS[color];
   const stroke = STROKES[color];
   const sw = STROKE_W[color];
+  const label = `${color === 'w' ? 'white' : 'black'} ${type}`;
 
   return (
     <svg
+      role="img"
+      aria-label={label}
       viewBox="0 0 45 45"
+      preserveAspectRatio="xMidYMid meet"
       className={className}
       style={{
         width: '82%',
@@ -107,6 +111,7 @@ export default function ChessPiece({ type, color, isSelected, className }: Chess
           : `drop-shadow(0 2px 3px rgba(0,0,0,0.4))`,
         transform: isSelected ? 'scale(1.12)' : undefined,
         transition: 'transform 120ms ease, filter 120ms ease',
+        shapeRendering: 'geometricPrecision',
       }}
     >
       <g
@@ -127,12 +132,16 @@ export function MiniPiece({ type, color }: { type: PieceType; color: PieceColor 
   const Shape = SHAPES[type];
   return (
     <svg
+      role="img"
+      aria-label={`captured ${color === 'w' ? 'white' : 'black'} ${type}`}
       viewBox="0 0 45 45"
+      preserveAspectRatio="xMidYMid meet"
       style={{
         width: '22px',
         height: '22px',
         opacity: 0.7,
         filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.3))',
+        shapeRendering: 'geometricPrecision',
       }}
     >
       <g

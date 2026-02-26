@@ -60,6 +60,13 @@ export default function PlayPage() {
 
   const gameOver = game.status === 'checkmate' || game.status === 'stalemate';
 
+  const getCaptureSquare = useCallback((move: { from: [number, number]; to: [number, number]; enPassant?: boolean }) => {
+    if (move.enPassant) {
+      return [move.from[0], move.to[1]] as [number, number];
+    }
+    return game.board[move.to[0]][move.to[1]] ? ([move.to[0], move.to[1]] as [number, number]) : null;
+  }, [game.board]);
+
   // Trigger a capture flash effect
   const triggerFlash = useCallback((square: [number, number]) => {
     if (flashTimeout.current) clearTimeout(flashTimeout.current);
@@ -74,19 +81,19 @@ export default function PlayPage() {
         const aiMove = getRandomMove(game);
         if (aiMove) {
           const notation = moveToNotation(game, aiMove);
-          const isCapture = game.board[aiMove.to[0]][aiMove.to[1]] !== null || aiMove.enPassant;
+          const captureSquare = getCaptureSquare(aiMove);
           const nextGame = makeMove(game, aiMove);
           setHistory((prev) => [...prev, { state: game, notation }]);
           setGame(nextGame);
           setSelected(null);
-          if (isCapture) triggerFlash(aiMove.to);
+          if (captureSquare) triggerFlash(captureSquare);
         }
       }, 400);
     }
     return () => {
       if (aiTimeout.current) clearTimeout(aiTimeout.current);
     };
-  }, [game, gameOver, triggerFlash]);
+  }, [game, gameOver, triggerFlash, getCaptureSquare]);
 
   const handleSquareClick = useCallback(
     (row: number, col: number) => {
@@ -102,12 +109,12 @@ export default function PlayPage() {
         if (move) {
           const actualMove = move.promotion ? { ...move, promotion: 'Q' as const } : move;
           const notation = moveToNotation(game, actualMove);
-          const isCapture = game.board[row][col] !== null || actualMove.enPassant;
+          const captureSquare = getCaptureSquare(actualMove);
           const nextGame = makeMove(game, actualMove);
           setHistory((prev) => [...prev, { state: game, notation }]);
           setGame(nextGame);
           setSelected(null);
-          if (isCapture) triggerFlash([row, col]);
+          if (captureSquare) triggerFlash(captureSquare);
           return;
         }
       }
@@ -122,7 +129,7 @@ export default function PlayPage() {
         setSelected(null);
       }
     },
-    [game, selected, legalMovesForSelected, gameOver, triggerFlash],
+    [game, selected, legalMovesForSelected, gameOver, triggerFlash, getCaptureSquare],
   );
 
   const handleNewGame = useCallback(() => {
@@ -136,7 +143,9 @@ export default function PlayPage() {
 
   const handleResign = useCallback(() => {
     if (aiTimeout.current) clearTimeout(aiTimeout.current);
+    if (flashTimeout.current) clearTimeout(flashTimeout.current);
     setGame((prev) => ({ ...prev, status: 'checkmate' }));
+    setFlashSquare(null);
   }, []);
 
   return (

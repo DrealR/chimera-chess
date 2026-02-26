@@ -180,6 +180,9 @@ export default function Board({
                       style={{
                         cursor: activeTool ? 'crosshair' : isLegalMove ? 'pointer' : piece ? 'pointer' : 'default',
                       }}
+                      data-square={`${row},${col}`}
+                      data-row={row}
+                      data-col={col}
                       data-piece-color={piece?.color}
                       onClick={() => onSquareClick(row, col)}
                       onMouseEnter={() => setHoveredSquare([row, col])}

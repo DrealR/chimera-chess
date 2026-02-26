@@ -296,3 +296,58 @@ button:hover {
     inset 0 0 0 2px rgba(80, 144, 255, 0.6),
     inset 0 0 12px rgba(80, 144, 255, 0.25);
 }
+
+/* ═══ MOBILE PERFORMANCE GUARDS ═══ */
+@media (max-width: 640px) {
+  .board-perspective {
+    perspective: none;
+  }
+
+  .board-3d {
+    transform: none;
+  }
+
+  .board-frame {
+    padding: 10px;
+    border-radius: 4px;
+  }
+
+  .board-frame-label {
+    font-size: 0.5rem;
+  }
+
+  .dust-particles {
+    display: none;
+  }
+
+  .contest-pulse {
+    animation: none;
+    opacity: 0.9;
+  }
+}
+
+/* ═══ REDUCED MOTION ACCESSIBILITY ═══ */
+@media (prefers-reduced-motion: reduce) {
+  .board-3d {
+    transform: none;
+    transition: none;
+  }
+
+  .contest-pulse,
+  .check-pulse,
+  .capture-flash,
+  .dust-particles::before,
+  .dust-particles::after {
+    animation: none !important;
+  }
+
+  .influence-glow,
+  .toggle-switch,
+  .toggle-switch::after {
+    transition: none !important;
+  }
+
+  .dust-particles {
+    display: none;
+  }
+}
