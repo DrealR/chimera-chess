@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 
-import { describe, expect, it } from 'vitest';
-import { render } from '@testing-library/react';
+import { afterEach, describe, expect, it } from 'vitest';
+import { cleanup, render } from '@testing-library/react';
 import type { ComponentProps } from 'react';
 import Board from './Board';
 import type { BoardState, ViewMode } from '@/lib/types';
@@ -34,6 +34,10 @@ function renderBoard(overrides?: Partial<ComponentProps<typeof Board>>) {
   return render(<Board {...props} />);
 }
 
+afterEach(() => {
+  cleanup();
+});
+
 describe('Board visuals', () => {
   it('renders influence glow on the matching square only', () => {
     const influence = createInfluence();
@@ -62,5 +66,41 @@ describe('Board visuals', () => {
     expect(legal?.querySelector('.legal-move-dot')).toBeTruthy();
     expect(check?.querySelector('.check-pulse')).toBeTruthy();
     expect(flash?.querySelector('.capture-flash')).toBeTruthy();
+  });
+
+  it('renders all four influence zones and legend in both mode', () => {
+    const influence = createInfluence();
+    influence.white[0][0] = 1; // blue
+    influence.black[0][1] = 1; // red
+    influence.white[0][2] = 1; // purple (both)
+    influence.black[0][2] = 1;
+    // green appears automatically where both are 0
+
+    const { container, getAllByText } = renderBoard({ influence, viewMode: 'both', showInfluence: true });
+
+    const blue = container.querySelector('[data-square="0,0"] .influence-glow') as HTMLElement;
+    const red = container.querySelector('[data-square="0,1"] .influence-glow') as HTMLElement;
+    const purple = container.querySelector('[data-square="0,2"] .influence-glow') as HTMLElement;
+    const green = container.querySelector('[data-square="0,3"] .influence-glow') as HTMLElement;
+
+    expect(blue.style.background).toContain('rgba(100,160,240');
+    expect(red.style.background).toContain('rgba(220,90,90');
+    expect(purple.style.background).toContain('rgba(160,120,200');
+    expect(green.style.background).toContain('rgba(80,180,100');
+
+    expect(getAllByText(/your territory/i).length).toBeGreaterThan(0);
+    expect(getAllByText(/opponent/i).length).toBeGreaterThan(0);
+    expect(getAllByText(/safe passage/i).length).toBeGreaterThan(0);
+    expect(getAllByText(/contested/i).length).toBeGreaterThan(0);
+  });
+
+  it('hides influence glows and legend when overlay is off', () => {
+    const influence = createInfluence();
+    influence.white[4][4] = 2;
+
+    const { container } = renderBoard({ influence, showInfluence: false });
+
+    expect(container.querySelector('.influence-glow')).toBeFalsy();
+    expect(container.textContent?.toLowerCase().includes('safe passage')).toBe(false);
   });
 });

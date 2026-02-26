@@ -45,4 +45,17 @@ describe('ChessPiece SVG', () => {
     const mini = screen.getByRole('img', { name: /captured black n/i });
     expect(mini.getAttribute('viewBox')).toBe('0 0 45 45');
   });
+
+  it('renders a structured knight glyph and fixed piece sizing', () => {
+    const { container } = render(<ChessPiece type="N" color="w" />);
+
+    const knight = screen.getByRole('img', { name: /white n/i });
+    expect(knight.getAttribute('preserveAspectRatio')).toBe('xMidYMid meet');
+    expect((knight as HTMLElement).style.width).toBe('82%');
+    expect((knight as HTMLElement).style.height).toBe('82%');
+
+    // Knight is composed of multiple paths and an eye circle (horse-head silhouette).
+    expect(container.querySelectorAll('path').length).toBeGreaterThanOrEqual(2);
+    expect(container.querySelectorAll('circle').length).toBeGreaterThanOrEqual(1);
+  });
 });

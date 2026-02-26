@@ -126,6 +126,7 @@ export default function GamePanel({
           className="text-xs text-left transition-colors"
           style={{ color: showInfluence ? '#c8956c' : '#444' }}
           onClick={onToggleInfluence}
+          aria-pressed={showInfluence}
         >
           {showInfluence ? '\u25CF' : '\u25CB'} Influence
         </button>
@@ -133,6 +134,7 @@ export default function GamePanel({
           className="text-xs text-left transition-colors"
           style={{ color: showProtocol ? '#c8956c' : '#444' }}
           onClick={onToggleProtocol}
+          aria-pressed={showProtocol}
         >
           {showProtocol ? '\u25CF' : '\u25CB'} The Cheat Code
         </button>
@@ -166,6 +168,7 @@ export default function GamePanel({
               className="transition-colors capitalize"
               style={{ color: difficulty === d ? '#c8956c' : '#444' }}
               onClick={() => onDifficultyChange(d)}
+              aria-pressed={difficulty === d}
             >
               {d}
             </button>

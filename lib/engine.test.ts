@@ -13,6 +13,26 @@ function totalInfluence(grid: number[][]): number {
   return grid.reduce((sum, row) => sum + row.reduce((inner, cell) => inner + cell, 0), 0);
 }
 
+function zoneCounts(influence: { white: number[][]; black: number[][] }) {
+  let blue = 0;
+  let red = 0;
+  let purple = 0;
+  let green = 0;
+
+  for (let r = 0; r < 8; r++) {
+    for (let c = 0; c < 8; c++) {
+      const w = influence.white[r][c];
+      const b = influence.black[r][c];
+      if (w > 0 && b > 0) purple++;
+      else if (w > 0) blue++;
+      else if (b > 0) red++;
+      else green++;
+    }
+  }
+
+  return { blue, red, purple, green };
+}
+
 describe('influence engine', () => {
   it('single knight in center controls 8 squares', () => {
     let board = createEmptyBoard();
@@ -108,5 +128,23 @@ describe('influence engine', () => {
     const fullInfluence = calculateInfluence(full);
     expect(fullInfluence.white).toHaveLength(8);
     expect(fullInfluence.white[0]).toHaveLength(8);
+  });
+
+  it('opening and sparse endgame have dramatically different zone distributions', () => {
+    const opening = calculateInfluence(PRESETS[0].board);
+
+    let endgame = createEmptyBoard();
+    endgame = placePiece(endgame, 0, 4, { color: 'b', type: 'K' });
+    endgame = placePiece(endgame, 7, 4, { color: 'w', type: 'K' });
+    const sparse = calculateInfluence(endgame);
+
+    const openingZones = zoneCounts(opening);
+    const sparseZones = zoneCounts(sparse);
+
+    // Opening still has meaningful safe passage.
+    expect(openingZones.green).toBeGreaterThan(0);
+    // Endgame shifts strongly toward safe squares due to far fewer attacking pieces.
+    expect(sparseZones.green - openingZones.green).toBeGreaterThan(8);
+    expect(JSON.stringify(openingZones)).not.toBe(JSON.stringify(sparseZones));
   });
 });
