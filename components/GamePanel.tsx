@@ -3,8 +3,6 @@
 import type { GameState } from '@/lib/chess';
 import type { Piece } from '@/lib/types';
 import { pieceSymbol } from '@/lib/types';
-import { moveToNotation } from '@/lib/chess';
-import type { InfluenceMap } from '@/lib/engine';
 import { randomInsight } from '@/lib/insights';
 import { useState, useMemo } from 'react';
 
@@ -23,11 +21,6 @@ const PIECE_ORDER: Record<string, number> = { Q: 0, R: 1, B: 2, N: 3, P: 4 };
 
 function sortCaptured(pieces: Piece[]): Piece[] {
   return [...pieces].sort((a, b) => (PIECE_ORDER[a.type] ?? 5) - (PIECE_ORDER[b.type] ?? 5));
-}
-
-function materialValue(pieces: Piece[]): number {
-  const vals: Record<string, number> = { P: 1, N: 3, B: 3, R: 5, Q: 9, K: 0 };
-  return pieces.reduce((sum, p) => sum + (vals[p.type] ?? 0), 0);
 }
 
 export default function GamePanel({

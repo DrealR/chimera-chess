@@ -25,7 +25,7 @@ export default function RootLayout({
           className="px-4 py-3 lg:px-8"
           style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}
         >
-          <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div className="flex items-baseline gap-3">
               <h1 className="text-lg font-bold tracking-tight">
                 <span style={{ color: '#c8956c' }}>BeyondChess&trade;</span>
@@ -38,7 +38,9 @@ export default function RootLayout({
                 See your creature breathe.
               </span>
             </div>
-            <Nav />
+            <div className="w-full sm:w-auto">
+              <Nav />
+            </div>
           </div>
         </header>
         {children}

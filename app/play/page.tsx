@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
-import type { ViewMode } from '@/lib/types';
 import { calculateInfluence } from '@/lib/engine';
 import {
   createInitialGame,
@@ -9,9 +8,8 @@ import {
   makeMove,
   moveToNotation,
   getRandomMove,
-  isInCheck,
 } from '@/lib/chess';
-import type { GameState, Move } from '@/lib/chess';
+import type { GameState } from '@/lib/chess';
 import Board from '@/components/Board';
 import GamePanel from '@/components/GamePanel';
 

@@ -31,6 +31,18 @@ function inBounds(r: number, c: number): boolean {
   return r >= 0 && r < 8 && c >= 0 && c < 8;
 }
 
+function sameMove(a: Move, b: Move): boolean {
+  return (
+    a.from[0] === b.from[0] &&
+    a.from[1] === b.from[1] &&
+    a.to[0] === b.to[0] &&
+    a.to[1] === b.to[1] &&
+    a.promotion === b.promotion &&
+    a.castle === b.castle &&
+    Boolean(a.enPassant) === Boolean(b.enPassant)
+  );
+}
+
 // --- Initial Position ---
 
 export function createInitialGame(): GameState {
@@ -235,12 +247,14 @@ function getPseudoLegalMoves(state: GameState): Move[] {
             const opp = OPP[turn];
             const kSide = turn === 'w' ? castling.wK : castling.bK;
             const qSide = turn === 'w' ? castling.wQ : castling.bQ;
-            if (kSide && !board[backRank][5] && !board[backRank][6] &&
+            const kRook = board[backRank][7];
+            const qRook = board[backRank][0];
+            if (kSide && kRook?.type === 'R' && kRook.color === turn && !board[backRank][5] && !board[backRank][6] &&
               !isSquareAttacked(board, backRank, 4, opp) &&
               !isSquareAttacked(board, backRank, 5, opp) &&
               !isSquareAttacked(board, backRank, 6, opp))
               moves.push({ from: [r, c], to: [backRank, 6], castle: 'K' });
-            if (qSide && !board[backRank][3] && !board[backRank][2] && !board[backRank][1] &&
+            if (qSide && qRook?.type === 'R' && qRook.color === turn && !board[backRank][3] && !board[backRank][2] && !board[backRank][1] &&
               !isSquareAttacked(board, backRank, 4, opp) &&
               !isSquareAttacked(board, backRank, 3, opp) &&
               !isSquareAttacked(board, backRank, 2, opp))
@@ -298,6 +312,11 @@ export function getLegalMovesFrom(state: GameState, row: number, col: number): M
 // --- Make Move ---
 
 export function makeMove(state: GameState, move: Move): GameState {
+  const legalMoves = getLegalMoves(state);
+  if (!legalMoves.some((m) => sameMove(m, move))) {
+    throw new Error('Illegal move');
+  }
+
   const piece = state.board[move.from[0]][move.from[1]]!;
   const captured = move.enPassant
     ? state.board[move.from[0]][move.to[1]]
