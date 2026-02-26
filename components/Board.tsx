@@ -240,7 +240,7 @@ export default function Board({
 
                       {/* SVG Piece */}
                       {piece && (
-                        <div className="relative z-10 flex items-center justify-center w-full h-full">
+                        <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
                           <ChessPiece
                             type={piece.type}
                             color={piece.color}
