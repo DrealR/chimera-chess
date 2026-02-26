@@ -15,19 +15,15 @@ export default function Nav() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex gap-1 overflow-x-auto max-w-full pb-1 sm:pb-0">
+    <nav className="flex gap-5 overflow-x-auto">
       {LINKS.map(({ href, label }) => {
         const active = pathname === href;
         return (
           <Link
             key={href}
             href={href}
-            className="px-3 py-1.5 rounded text-xs font-medium transition-colors whitespace-nowrap shrink-0"
-            style={
-              active
-                ? { backgroundColor: 'rgba(200,149,108,0.15)', color: '#c8956c' }
-                : { color: '#666' }
-            }
+            className="text-xs whitespace-nowrap transition-colors"
+            style={{ color: active ? '#c8956c' : '#555' }}
           >
             {label}
           </Link>

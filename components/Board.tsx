@@ -15,7 +15,6 @@ type BoardProps = {
   showLabels: boolean;
   onSquareClick: (row: number, col: number) => void;
   activeTool: boolean;
-  // Play-mode optional props
   legalMoves?: Set<string>;
   lastMove?: { from: [number, number]; to: [number, number] };
   checkSquare?: [number, number] | null;
@@ -23,7 +22,7 @@ type BoardProps = {
   flashSquare?: [number, number] | null;
 };
 
-/** Returns a radial-gradient background for the influence glow overlay */
+/** Soft watercolor-wash influence style */
 function getInfluenceStyle(
   row: number,
   col: number,
@@ -32,13 +31,12 @@ function getInfluenceStyle(
   highlightedSquares: Set<string> | null,
   highlightedPiecePos: [number, number] | null,
 ): React.CSSProperties {
-  // Single-piece highlight mode (sandbox)
   if (highlightedSquares) {
     if (highlightedPiecePos && highlightedPiecePos[0] === row && highlightedPiecePos[1] === col) {
-      return { background: 'radial-gradient(circle, rgba(80,200,120,0.5) 0%, rgba(80,200,120,0.2) 70%, transparent 100%)' };
+      return { background: 'radial-gradient(circle, rgba(200,149,108,0.45) 0%, rgba(200,149,108,0.1) 70%, transparent 100%)' };
     }
     if (highlightedSquares.has(`${row},${col}`)) {
-      return { background: 'radial-gradient(circle, rgba(80,200,120,0.4) 0%, rgba(80,200,120,0.15) 70%, transparent 100%)' };
+      return { background: 'radial-gradient(circle, rgba(200,149,108,0.3) 0%, rgba(200,149,108,0.08) 70%, transparent 100%)' };
     }
     return {};
   }
@@ -48,45 +46,40 @@ function getInfluenceStyle(
 
   if (viewMode === 'white') {
     if (w === 0) return {};
-    const a = Math.min(0.15 + 0.13 * w, 0.75);
-    return { background: `radial-gradient(circle, rgba(80,144,255,${a}) 0%, rgba(80,144,255,${a * 0.4}) 70%, transparent 100%)` };
+    const a = Math.min(0.12 + 0.1 * w, 0.55);
+    return { background: `radial-gradient(circle, rgba(100,160,240,${a}) 0%, rgba(100,160,240,${a * 0.25}) 70%, transparent 100%)` };
   }
   if (viewMode === 'black') {
     if (b === 0) return {};
-    const a = Math.min(0.15 + 0.13 * b, 0.75);
-    return { background: `radial-gradient(circle, rgba(255,80,96,${a}) 0%, rgba(255,80,96,${a * 0.4}) 70%, transparent 100%)` };
+    const a = Math.min(0.12 + 0.1 * b, 0.55);
+    return { background: `radial-gradient(circle, rgba(220,90,90,${a}) 0%, rgba(220,90,90,${a * 0.25}) 70%, transparent 100%)` };
   }
   if (viewMode === 'contest') {
     if (w === 0 && b === 0) return {};
     if (w > b) {
-      const a = Math.min(0.15 + 0.13 * (w - b), 0.75);
-      return { background: `radial-gradient(circle, rgba(80,144,255,${a}) 0%, rgba(80,144,255,${a * 0.4}) 70%, transparent 100%)` };
+      const a = Math.min(0.12 + 0.1 * (w - b), 0.55);
+      return { background: `radial-gradient(circle, rgba(100,160,240,${a}) 0%, rgba(100,160,240,${a * 0.25}) 70%, transparent 100%)` };
     }
     if (b > w) {
-      const a = Math.min(0.15 + 0.13 * (b - w), 0.75);
-      return { background: `radial-gradient(circle, rgba(255,80,96,${a}) 0%, rgba(255,80,96,${a * 0.4}) 70%, transparent 100%)` };
+      const a = Math.min(0.12 + 0.1 * (b - w), 0.55);
+      return { background: `radial-gradient(circle, rgba(220,90,90,${a}) 0%, rgba(220,90,90,${a * 0.25}) 70%, transparent 100%)` };
     }
-    const a = Math.min(0.2 + 0.1 * w, 0.7);
-    return { background: `radial-gradient(circle, rgba(160,96,255,${a}) 0%, rgba(160,96,255,${a * 0.4}) 70%, transparent 100%)` };
+    const a = Math.min(0.15 + 0.08 * w, 0.5);
+    return { background: `radial-gradient(circle, rgba(160,120,200,${a}) 0%, rgba(160,120,200,${a * 0.25}) 70%, transparent 100%)` };
   }
 
   // 'both' mode
   if (w === 0 && b === 0) return {};
   if (w > 0 && b === 0) {
-    const a = Math.min(0.15 + 0.13 * w, 0.75);
-    return { background: `radial-gradient(circle, rgba(80,144,255,${a}) 0%, rgba(80,144,255,${a * 0.4}) 70%, transparent 100%)` };
+    const a = Math.min(0.12 + 0.1 * w, 0.55);
+    return { background: `radial-gradient(circle, rgba(100,160,240,${a}) 0%, rgba(100,160,240,${a * 0.25}) 70%, transparent 100%)` };
   }
   if (b > 0 && w === 0) {
-    const a = Math.min(0.15 + 0.13 * b, 0.75);
-    return { background: `radial-gradient(circle, rgba(255,80,96,${a}) 0%, rgba(255,80,96,${a * 0.4}) 70%, transparent 100%)` };
+    const a = Math.min(0.12 + 0.1 * b, 0.55);
+    return { background: `radial-gradient(circle, rgba(220,90,90,${a}) 0%, rgba(220,90,90,${a * 0.25}) 70%, transparent 100%)` };
   }
-  // Contested
-  const a = Math.min(0.15 + 0.1 * (w + b), 0.75);
-  return { background: `radial-gradient(circle, rgba(160,96,255,${a}) 0%, rgba(160,96,255,${a * 0.4}) 70%, transparent 100%)` };
-}
-
-function isContested(row: number, col: number, influence: InfluenceMap): boolean {
-  return influence.white[row][col] > 0 && influence.black[row][col] > 0;
+  const a = Math.min(0.12 + 0.08 * (w + b), 0.55);
+  return { background: `radial-gradient(circle, rgba(160,120,200,${a}) 0%, rgba(160,120,200,${a * 0.25}) 70%, transparent 100%)` };
 }
 
 export default function Board({
@@ -118,184 +111,151 @@ export default function Board({
   }, [hoveredSquare, influence, board]);
 
   return (
-    <div className="flex flex-col gap-2">
-      {/* 3D Perspective wrapper */}
-      <div className="board-perspective">
-        <div className="board-3d">
-          {/* Wooden frame */}
-          <div className="board-frame relative">
-            {/* Dust particles */}
-            <div className="dust-particles" />
-
-            {/* Top file labels */}
-            {showLabels && (
-              <div className="flex justify-around px-0" style={{ marginBottom: 8 }}>
-                {FILES.map((f) => (
-                  <span key={f} className="board-frame-label flex-1 text-center">
-                    {f}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            <div className="flex">
-              {/* Left rank labels */}
-              {showLabels && (
-                <div className="flex flex-col justify-around" style={{ marginRight: 8 }}>
-                  {RANKS.map((r) => (
-                    <span key={r} className="board-frame-label flex-1 flex items-center">
-                      {r}
-                    </span>
-                  ))}
-                </div>
-              )}
-
-              {/* Board grid */}
-              <div
-                className="grid grid-cols-8 aspect-square flex-1 overflow-hidden select-none"
-                style={{ borderRadius: 2 }}
-                onMouseLeave={() => setHoveredSquare(null)}
-              >
-                {Array.from({ length: 64 }, (_, i) => {
-                  const row = Math.floor(i / 8);
-                  const col = i % 8;
-                  const isLight = (row + col) % 2 === 0;
-                  const piece = board[row][col];
-                  const influenceStyle = getInfluenceStyle(row, col, influence, viewMode, highlightedSquares, highlightedPiecePos);
-                  const hasInfluence = Object.keys(influenceStyle).length > 0;
-                  const contested = hasInfluence && isContested(row, col, influence) && !highlightedSquares;
-                  const isHovered = hoveredSquare?.[0] === row && hoveredSquare?.[1] === col;
-                  const isHighlightedPiece = highlightedPiecePos?.[0] === row && highlightedPiecePos?.[1] === col;
-                  const isLegalMove = legalMoves?.has(`${row},${col}`) ?? false;
-                  const isLastMoveFrom = lastMove && lastMove.from[0] === row && lastMove.from[1] === col;
-                  const isLastMoveTo = lastMove && lastMove.to[0] === row && lastMove.to[1] === col;
-                  const isCheck = checkSquare && checkSquare[0] === row && checkSquare[1] === col;
-                  const isSelected = selectedSquare && selectedSquare[0] === row && selectedSquare[1] === col;
-                  const isFlash = flashSquare && flashSquare[0] === row && flashSquare[1] === col;
-
-                  return (
-                    <div
-                      key={i}
-                      className={`relative flex items-center justify-center ${isLight ? 'square-light' : 'square-dark'} square-depth`}
-                      style={{
-                        cursor: activeTool ? 'crosshair' : isLegalMove ? 'pointer' : piece ? 'pointer' : 'default',
-                      }}
-                      data-square={`${row},${col}`}
-                      data-row={row}
-                      data-col={col}
-                      data-piece-color={piece?.color}
-                      onClick={() => onSquareClick(row, col)}
-                      onMouseEnter={() => setHoveredSquare([row, col])}
-                    >
-                      {/* Last move highlight */}
-                      {(isLastMoveFrom || isLastMoveTo) && (
-                        <div className="absolute inset-0 pointer-events-none last-move-highlight" />
-                      )}
-
-                      {/* Influence glow overlay */}
-                      {hasInfluence && (
-                        <div
-                          className={`absolute inset-0 pointer-events-none influence-glow ${contested ? 'contest-pulse' : ''}`}
-                          style={influenceStyle}
-                        />
-                      )}
-
-                      {/* Hover ring */}
-                      {isHovered && (
-                        <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-white/20" />
-                      )}
-
-                      {/* Selected piece ring (sandbox mode) */}
-                      {isHighlightedPiece && !highlightedSquares && (
-                        <div className="absolute inset-0 pointer-events-none ring-2 ring-inset ring-emerald-400/60" />
-                      )}
-
-                      {/* Selected piece glow (play mode) */}
-                      {isSelected && (
-                        <div className="absolute inset-0 pointer-events-none selected-glow" />
-                      )}
-
-                      {/* Check pulse */}
-                      {isCheck && (
-                        <div className="absolute inset-0 pointer-events-none check-pulse" />
-                      )}
-
-                      {/* Capture flash */}
-                      {isFlash && (
-                        <div className="absolute inset-0 pointer-events-none capture-flash z-20" />
-                      )}
-
-                      {/* Legal move dot */}
-                      {isLegalMove && !piece && (
-                        <div
-                          className="absolute z-10 pointer-events-none legal-move-dot"
-                          style={{ width: '26%', height: '26%' }}
-                        />
-                      )}
-
-                      {/* Legal move capture ring */}
-                      {isLegalMove && piece && (
-                        <div className="absolute inset-0 pointer-events-none legal-capture-ring" />
-                      )}
-
-                      {/* SVG Piece */}
-                      {piece && (
-                        <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-                          <ChessPiece
-                            type={piece.type}
-                            color={piece.color}
-                            isSelected={!!isSelected}
-                          />
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Right rank labels */}
-              {showLabels && (
-                <div className="flex flex-col justify-around" style={{ marginLeft: 8 }}>
-                  {RANKS.map((r) => (
-                    <span key={r} className="board-frame-label flex-1 flex items-center">
-                      {r}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Bottom file labels */}
-            {showLabels && (
-              <div className="flex justify-around px-0" style={{ marginTop: 8 }}>
-                {FILES.map((f) => (
-                  <span key={f} className="board-frame-label flex-1 text-center">
-                    {f}
-                  </span>
-                ))}
-              </div>
-            )}
+    <div className="flex flex-col gap-3">
+      {/* Board frame */}
+      <div className="board-frame">
+        {/* Top file labels */}
+        {showLabels && (
+          <div className="flex justify-around pointer-events-none" style={{ marginBottom: 6, paddingLeft: 14, paddingRight: 14 }}>
+            {FILES.map((f) => (
+              <span key={f} className="board-frame-label flex-1 text-center">{f}</span>
+            ))}
           </div>
+        )}
+
+        <div className="flex">
+          {/* Left rank labels */}
+          {showLabels && (
+            <div className="flex flex-col justify-around pointer-events-none" style={{ width: 14 }}>
+              {RANKS.map((r) => (
+                <span key={r} className="board-frame-label flex-1 flex items-center justify-center">{r}</span>
+              ))}
+            </div>
+          )}
+
+          {/* Grid */}
+          <div
+            className="grid grid-cols-8 aspect-square flex-1 overflow-hidden select-none relative z-[1]"
+            onMouseLeave={() => setHoveredSquare(null)}
+          >
+            {Array.from({ length: 64 }, (_, i) => {
+              const row = Math.floor(i / 8);
+              const col = i % 8;
+              const isLight = (row + col) % 2 === 0;
+              const piece = board[row][col];
+              const influenceStyle = getInfluenceStyle(row, col, influence, viewMode, highlightedSquares, highlightedPiecePos);
+              const hasInfluence = Object.keys(influenceStyle).length > 0;
+              const isHovered = hoveredSquare?.[0] === row && hoveredSquare?.[1] === col;
+              const isHighlightedPiece = highlightedPiecePos?.[0] === row && highlightedPiecePos?.[1] === col;
+              const isLegalMove = legalMoves?.has(`${row},${col}`) ?? false;
+              const isLastMoveFrom = lastMove && lastMove.from[0] === row && lastMove.from[1] === col;
+              const isLastMoveTo = lastMove && lastMove.to[0] === row && lastMove.to[1] === col;
+              const isCheck = checkSquare && checkSquare[0] === row && checkSquare[1] === col;
+              const isSelected = selectedSquare && selectedSquare[0] === row && selectedSquare[1] === col;
+              const isFlash = flashSquare && flashSquare[0] === row && flashSquare[1] === col;
+
+              return (
+                <div
+                  key={i}
+                  className={`relative flex items-center justify-center ${isLight ? 'square-light' : 'square-dark'} square-depth`}
+                  style={{
+                    cursor: activeTool ? 'crosshair' : isLegalMove ? 'pointer' : piece ? 'pointer' : 'default',
+                  }}
+                  data-square={`${row},${col}`}
+                  data-row={row}
+                  data-col={col}
+                  data-piece-color={piece?.color}
+                  onClick={() => onSquareClick(row, col)}
+                  onMouseEnter={() => setHoveredSquare([row, col])}
+                >
+                  {(isLastMoveFrom || isLastMoveTo) && (
+                    <div className="absolute inset-0 pointer-events-none last-move-highlight" />
+                  )}
+
+                  {hasInfluence && (
+                    <div className="absolute inset-0 pointer-events-none influence-glow" style={influenceStyle} />
+                  )}
+
+                  {isHovered && (
+                    <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(255,255,255,0.06)' }} />
+                  )}
+
+                  {isHighlightedPiece && !highlightedSquares && (
+                    <div className="absolute inset-0 pointer-events-none selected-glow" />
+                  )}
+
+                  {isSelected && (
+                    <div className="absolute inset-0 pointer-events-none selected-glow" />
+                  )}
+
+                  {isCheck && (
+                    <div className="absolute inset-0 pointer-events-none check-pulse" />
+                  )}
+
+                  {isFlash && (
+                    <div className="absolute inset-0 pointer-events-none capture-flash z-20" />
+                  )}
+
+                  {isLegalMove && !piece && (
+                    <div
+                      className="absolute z-10 pointer-events-none legal-move-dot"
+                      style={{ width: '26%', height: '26%' }}
+                    />
+                  )}
+
+                  {isLegalMove && piece && (
+                    <div className="absolute inset-0 pointer-events-none legal-capture-ring" />
+                  )}
+
+                  {piece && (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+                      <ChessPiece
+                        type={piece.type}
+                        color={piece.color}
+                        isSelected={!!isSelected}
+                      />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Right rank labels */}
+          {showLabels && (
+            <div className="flex flex-col justify-around pointer-events-none" style={{ width: 14 }}>
+              {RANKS.map((r) => (
+                <span key={r} className="board-frame-label flex-1 flex items-center justify-center">{r}</span>
+              ))}
+            </div>
+          )}
         </div>
+
+        {/* Bottom file labels */}
+        {showLabels && (
+          <div className="flex justify-around pointer-events-none" style={{ marginTop: 6, paddingLeft: 14, paddingRight: 14 }}>
+            {FILES.map((f) => (
+              <span key={f} className="board-frame-label flex-1 text-center">{f}</span>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Hover info bar */}
-      <div className="h-6 text-sm font-mono px-1" style={{ color: '#888' }}>
+      {/* Hover info */}
+      <div className="h-5 text-xs font-mono px-1" style={{ color: '#555' }}>
         {hoverInfo ? (
           <span>
-            <span className="font-bold" style={{ color: '#e8e4df' }}>
-              {hoverInfo.name.toUpperCase()}
-            </span>
-            {' \u2014 '}
-            <span style={{ color: '#5090ff' }}>W:{hoverInfo.white}</span>
+            <span style={{ color: '#888' }}>{hoverInfo.name}</span>
             {' '}
-            <span style={{ color: '#ff5060' }}>B:{hoverInfo.black}</span>
+            <span style={{ color: '#4a90d9' }}>{hoverInfo.white}</span>
+            <span style={{ color: '#555' }}>/</span>
+            <span style={{ color: '#c85050' }}>{hoverInfo.black}</span>
             {hoverInfo.white > 0 && hoverInfo.black > 0 && (
-              <span style={{ color: '#a060ff' }}> contested</span>
+              <span style={{ color: '#9070c0' }}> contested</span>
             )}
           </span>
         ) : (
-          <span>Hover a square to inspect</span>
+          <span>&nbsp;</span>
         )}
       </div>
     </div>

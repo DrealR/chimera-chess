@@ -67,14 +67,12 @@ export default function PlayPage() {
     return game.board[move.to[0]][move.to[1]] ? ([move.to[0], move.to[1]] as [number, number]) : null;
   }, [game.board]);
 
-  // Trigger a capture flash effect
   const triggerFlash = useCallback((square: [number, number]) => {
     if (flashTimeout.current) clearTimeout(flashTimeout.current);
     setFlashSquare(square);
     flashTimeout.current = setTimeout(() => setFlashSquare(null), 400);
   }, []);
 
-  // AI plays for black
   useEffect(() => {
     if (game.turn === 'b' && !gameOver) {
       aiTimeout.current = setTimeout(() => {
@@ -150,10 +148,10 @@ export default function PlayPage() {
 
   return (
     <main className="min-h-screen" style={{ backgroundColor: '#0a0a0a', color: '#e8e4df' }}>
-      <div className="max-w-7xl mx-auto px-4 py-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
-          {/* Board */}
-          <div className="flex-shrink-0 w-full max-w-[560px] mx-auto lg:mx-0">
+      <div className="max-w-6xl mx-auto px-4 py-8 lg:px-8 lg:py-14">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
+          {/* Board — hero, takes most of the space */}
+          <div className="flex-1 w-full max-w-[600px] mx-auto lg:mx-0">
             <Board
               board={game.board}
               influence={influence}
@@ -171,8 +169,8 @@ export default function PlayPage() {
             />
           </div>
 
-          {/* Sidebar */}
-          <div className="w-full lg:min-w-[260px] lg:max-w-[320px]">
+          {/* Panel — thin, secondary */}
+          <div className="w-full lg:w-[200px] lg:flex-shrink-0">
             <GamePanel
               game={game}
               history={history}
@@ -188,31 +186,30 @@ export default function PlayPage() {
 
         {/* Checkmate / Stalemate overlay */}
         {gameOver && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.7)' }}>
-            <div className="checkmate-overlay glass-panel p-8 text-center max-w-md mx-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.85)' }}>
+            <div className="checkmate-overlay text-center px-8">
               <div
-                className="text-3xl font-bold mb-2"
-                style={{ color: game.status === 'checkmate' ? '#f0a050' : '#888' }}
+                className="text-4xl font-bold tracking-tight mb-3"
+                style={{
+                  fontFamily: 'var(--font-space-grotesk), sans-serif',
+                  color: '#e8e4df',
+                }}
               >
                 {game.status === 'checkmate' ? 'Checkmate' : 'Stalemate'}
               </div>
-              <div className="text-sm mb-6" style={{ color: '#aaa' }}>
+              <div className="text-sm mb-10" style={{ color: '#666' }}>
                 {game.status === 'checkmate'
                   ? game.turn === 'w'
-                    ? 'Black wins the game!'
-                    : 'White wins the game!'
-                  : 'The game is a draw.'}
+                    ? 'Black wins'
+                    : 'White wins'
+                  : 'Draw'}
               </div>
               <button
-                className="px-6 py-3 rounded-lg text-sm font-semibold"
-                style={{
-                  backgroundColor: 'rgba(80,200,120,0.15)',
-                  color: '#50c878',
-                  border: '1px solid rgba(80,200,120,0.2)',
-                }}
+                className="text-sm transition-opacity hover:opacity-70"
+                style={{ color: '#c8956c' }}
                 onClick={handleNewGame}
               >
-                Play Again
+                Play again
               </button>
             </div>
           </div>

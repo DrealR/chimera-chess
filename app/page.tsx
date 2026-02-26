@@ -9,11 +9,11 @@ import Board from '@/components/Board';
 import PiecePalette from '@/components/PiecePalette';
 import StatsPanel from '@/components/StatsPanel';
 
-const VIEW_MODES: { key: ViewMode; label: string; color: string }[] = [
-  { key: 'both', label: 'Both', color: '#c8956c' },
-  { key: 'white', label: 'White', color: '#5090ff' },
-  { key: 'black', label: 'Black', color: '#ff5060' },
-  { key: 'contest', label: 'Contest', color: '#a060ff' },
+const VIEW_MODES: { key: ViewMode; label: string }[] = [
+  { key: 'both', label: 'Both' },
+  { key: 'white', label: 'White' },
+  { key: 'black', label: 'Black' },
+  { key: 'contest', label: 'Contest' },
 ];
 
 export default function InfluenceMapPage() {
@@ -69,10 +69,10 @@ export default function InfluenceMapPage() {
 
   return (
     <main className="min-h-screen" style={{ backgroundColor: '#0a0a0a', color: '#e8e4df' }}>
-      <div className="max-w-7xl mx-auto px-4 py-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+      <div className="max-w-6xl mx-auto px-4 py-8 lg:px-8 lg:py-14">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
           {/* Board */}
-          <div className="flex-shrink-0 w-full max-w-[560px] mx-auto lg:mx-0">
+          <div className="flex-1 w-full max-w-[600px] mx-auto lg:mx-0">
             <Board
               board={board}
               influence={influence}
@@ -86,29 +86,18 @@ export default function InfluenceMapPage() {
           </div>
 
           {/* Sidebar */}
-          <div className="flex flex-col gap-5 w-full lg:min-w-[240px] lg:max-w-[320px]">
+          <div className="flex flex-col gap-6 w-full lg:w-[220px] lg:flex-shrink-0">
             {/* View Mode */}
-            <div className="space-y-2">
-              <h3
-                className="text-xs font-bold uppercase tracking-wider"
-                style={{ color: '#c8956c' }}
-              >
-                View Mode
-              </h3>
-              <div className="flex flex-wrap gap-1">
-                {VIEW_MODES.map(({ key, label, color }) => (
+            <div>
+              <div className="text-[0.6rem] uppercase tracking-widest mb-2" style={{ color: '#444' }}>
+                View
+              </div>
+              <div className="flex flex-wrap gap-3">
+                {VIEW_MODES.map(({ key, label }) => (
                   <button
                     key={key}
-                    className="px-3 py-1.5 rounded text-xs font-medium"
-                    style={
-                      viewMode === key
-                        ? {
-                            backgroundColor: `${color}20`,
-                            color,
-                            boxShadow: `inset 0 0 0 1px ${color}`,
-                          }
-                        : { backgroundColor: 'rgba(255,255,255,0.04)', color: '#888' }
-                    }
+                    className="text-xs transition-colors"
+                    style={{ color: viewMode === key ? '#c8956c' : '#444' }}
                     onClick={() => setViewMode(key)}
                   >
                     {label}
@@ -118,19 +107,16 @@ export default function InfluenceMapPage() {
             </div>
 
             {/* Presets */}
-            <div className="space-y-2">
-              <h3
-                className="text-xs font-bold uppercase tracking-wider"
-                style={{ color: '#c8956c' }}
-              >
+            <div>
+              <div className="text-[0.6rem] uppercase tracking-widest mb-2" style={{ color: '#444' }}>
                 Presets
-              </h3>
-              <div className="flex flex-wrap gap-1.5">
+              </div>
+              <div className="flex flex-wrap gap-2">
                 {PRESETS.map((preset, i) => (
                   <button
                     key={preset.name}
-                    className="px-2.5 py-1 rounded text-xs"
-                    style={{ backgroundColor: 'rgba(255,255,255,0.04)', color: '#888' }}
+                    className="text-xs transition-colors"
+                    style={{ color: '#666' }}
                     onClick={() => handlePreset(i)}
                     title={preset.description}
                   >
@@ -144,22 +130,20 @@ export default function InfluenceMapPage() {
             <PiecePalette selection={tool} onSelect={setTool} onClear={handleClear} />
 
             {/* Labels Toggle */}
-            <label className="flex items-center gap-2 text-xs cursor-pointer" style={{ color: '#888' }}>
-              <input
-                type="checkbox"
-                checked={showLabels}
-                onChange={(e) => setShowLabels(e.target.checked)}
-                className="accent-amber-600"
-              />
-              Show coordinates
-            </label>
+            <button
+              className="text-xs text-left transition-colors"
+              style={{ color: showLabels ? '#c8956c' : '#444' }}
+              onClick={() => setShowLabels((p) => !p)}
+            >
+              {showLabels ? '\u25CF' : '\u25CB'} Coordinates
+            </button>
 
             {/* Stats */}
             <StatsPanel board={board} influence={influence} />
 
-            {/* Footer credit */}
-            <div className="text-[0.6rem] pt-4" style={{ color: '#444', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-              Coach Lamont &times; Deji &middot; Working Wonders Starting Home Inc. &middot; 2026
+            {/* Footer */}
+            <div className="text-[0.55rem] pt-4" style={{ color: '#333' }}>
+              Coach Lamont &times; Deji &middot; Working Wonders Starting Home Inc.
             </div>
           </div>
         </div>

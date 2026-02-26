@@ -5,12 +5,12 @@ import { useState } from 'react';
 // ─── Tabs ───
 
 const TABS = [
-  { id: 'world', label: 'The World', icon: '🗺️' },
-  { id: 'squad', label: 'Your Squad', icon: '🎮' },
-  { id: 'battle', label: 'The Battle', icon: '⚔️' },
-  { id: 'superpowers', label: 'Superpowers', icon: '🧬' },
-  { id: 'breathe', label: 'The Cheat Code', icon: '🔑' },
-  { id: 'boss', label: 'Boss Levels', icon: '👾' },
+  { id: 'world', label: 'The World' },
+  { id: 'squad', label: 'Your Squad' },
+  { id: 'battle', label: 'The Battle' },
+  { id: 'superpowers', label: 'Superpowers' },
+  { id: 'breathe', label: 'The Cheat Code' },
+  { id: 'boss', label: 'Boss Levels' },
 ] as const;
 
 type TabId = (typeof TABS)[number]['id'];
@@ -20,23 +20,20 @@ type TabId = (typeof TABS)[number]['id'];
 function Box({
   title,
   children,
-  color = '#f0a050',
+  color = '#c8956c',
 }: {
   title?: string;
   children: React.ReactNode;
   color?: string;
 }) {
   return (
-    <div
-      className="rounded-r-xl p-5"
-      style={{ backgroundColor: '#1a1510', borderLeft: `4px solid ${color}` }}
-    >
+    <div className="pl-4" style={{ borderLeft: `2px solid ${color}30` }}>
       {title && (
-        <div className="text-sm font-bold mb-2" style={{ color }}>
+        <div className="text-sm font-medium mb-1.5" style={{ color }}>
           {title}
         </div>
       )}
-      <div className="text-sm leading-relaxed" style={{ color: '#ccc' }}>
+      <div className="text-sm leading-relaxed" style={{ color: '#999' }}>
         {children}
       </div>
     </div>
@@ -46,7 +43,7 @@ function Box({
 function QuizCard({
   question,
   answer,
-  color = '#f0a050',
+  color = '#c8956c',
 }: {
   question: string;
   answer: string;
@@ -55,42 +52,31 @@ function QuizCard({
   const [open, setOpen] = useState(false);
   return (
     <div
-      className="rounded-lg cursor-pointer transition-all"
-      style={{
-        padding: '14px 18px',
-        backgroundColor: open ? '#1a1510' : '#141414',
-        border: open ? `1px solid ${color}44` : '1px solid #222',
-      }}
+      className="cursor-pointer"
       onClick={() => setOpen(!open)}
     >
-      <div className="flex justify-between items-center">
-        <span className="text-sm font-semibold" style={{ color: open ? color : '#ddd' }}>
-          🤔 {question}
+      <div className="flex justify-between items-center py-2">
+        <span className="text-sm" style={{ color: open ? color : '#888' }}>
+          {question}
         </span>
-        <span
-          className="text-base transition-transform"
-          style={{ color: '#555', transform: open ? 'rotate(45deg)' : 'none' }}
-        >
-          +
+        <span className="text-xs" style={{ color: '#444' }}>
+          {open ? '\u2212' : '+'}
         </span>
       </div>
       {open && (
-        <div
-          className="mt-3 px-4 py-3 rounded-lg text-sm leading-relaxed"
-          style={{ backgroundColor: '#0a0a0a', color: '#aaa', borderLeft: `3px solid ${color}` }}
-        >
-          💡 {answer}
+        <div className="text-sm leading-relaxed pb-3 pl-4" style={{ color: '#777' }}>
+          {answer}
         </div>
       )}
     </div>
   );
 }
 
-function Tag({ children, color = '#f0a050' }: { children: React.ReactNode; color?: string }) {
+function Tag({ children, color = '#c8956c' }: { children: React.ReactNode; color?: string }) {
   return (
     <span
-      className="inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold mr-1.5 mb-1"
-      style={{ backgroundColor: color + '18', color }}
+      className="inline-block text-xs mr-2 mb-1"
+      style={{ color }}
     >
       {children}
     </span>
@@ -99,7 +85,10 @@ function Tag({ children, color = '#f0a050' }: { children: React.ReactNode; color
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <div className="text-lg font-bold" style={{ color: '#f0a050', lineHeight: 1.4 }}>
+    <div
+      className="text-2xl font-bold tracking-tight"
+      style={{ fontFamily: 'var(--font-space-grotesk), sans-serif', color: '#e8e4df', lineHeight: 1.3 }}
+    >
       {children}
     </div>
   );
@@ -378,47 +367,34 @@ export default function LearnPage() {
 
   return (
     <main className="min-h-screen" style={{ backgroundColor: '#0a0a0a', color: '#e8e4df' }}>
-      {/* Gradient top bar */}
-      <div
-        style={{
-          height: '4px',
-          background: 'linear-gradient(90deg, #f0a050, #e06040, #f0a050, #50c878, #f0a050)',
-        }}
-      />
+      <div className="max-w-3xl mx-auto px-4 lg:px-8">
+        {/* Hero */}
+        <div className="pt-8 pb-10">
+          <p className="text-sm leading-relaxed" style={{ color: '#666', maxWidth: 520 }}>
+            Chess isn&apos;t about memorizing moves. It&apos;s about learning to{' '}
+            <span style={{ color: '#c8956c' }}>see</span> and{' '}
+            <span style={{ color: '#888' }}>think</span>.
+          </p>
+        </div>
 
-      {/* Hero */}
-      <div className="px-4 py-6 lg:px-8 max-w-[780px]" style={{ borderBottom: '1px solid #1a1a1a' }}>
-        <p className="text-sm" style={{ color: '#888', maxWidth: 580, lineHeight: 1.6 }}>
-          Chess isn&apos;t about memorizing moves. It&apos;s about learning to{' '}
-          <strong style={{ color: '#f0a050' }}>SEE</strong> and{' '}
-          <strong style={{ color: '#50c878' }}>THINK</strong>. Master this, and you&apos;ll be
-          dangerous on the board AND in life.
-        </p>
-      </div>
+        {/* Tab Navigation */}
+        <div className="flex gap-5 overflow-x-auto pb-6" style={{ scrollbarWidth: 'none' }}>
+          {TABS.map((t) => (
+            <button
+              key={t.id}
+              className="text-xs whitespace-nowrap transition-colors"
+              style={{
+                color: tab === t.id ? '#c8956c' : '#444',
+              }}
+              onClick={() => setTab(t.id)}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
 
-      {/* Tab Navigation */}
-      <div
-        className="flex overflow-x-auto"
-        style={{ borderBottom: '1px solid #1a1a1a', scrollbarWidth: 'none' }}
-      >
-        {TABS.map((t) => (
-          <button
-            key={t.id}
-            className="px-4 py-3 text-xs font-bold whitespace-nowrap"
-            style={{
-              backgroundColor: tab === t.id ? '#1a1510' : 'transparent',
-              borderBottom: tab === t.id ? '3px solid #f0a050' : '3px solid transparent',
-              color: tab === t.id ? '#f0a050' : '#555',
-            }}
-            onClick={() => setTab(t.id)}
-          >
-            {t.icon} {t.label}
-          </button>
-        ))}
-      </div>
-
-      {/* Content */}
-      <div className="px-4 py-6 lg:px-8 max-w-[780px]">
+        {/* Content */}
+        <div className="pb-16">
         {/* ═══ THE WORLD ═══ */}
         {tab === 'world' && (
           <div className="space-y-5">
@@ -1012,15 +988,12 @@ export default function LearnPage() {
             </div>
           </div>
         )}
-      </div>
+        </div>
 
-      {/* Footer */}
-      <div
-        className="px-4 py-4 flex justify-between text-[0.6rem] lg:px-8"
-        style={{ color: '#444', borderTop: '1px solid #1a1a1a' }}
-      >
-        <span>CHIMERA CHESS &mdash; NextGen Leaders</span>
-        <span>Think Different. Play Different.</span>
+        {/* Footer */}
+        <div className="text-[0.55rem] pt-12" style={{ color: '#333' }}>
+          Coach Lamont &times; Deji &middot; Working Wonders Starting Home Inc.
+        </div>
       </div>
     </main>
   );

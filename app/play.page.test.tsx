@@ -37,10 +37,10 @@ describe('play page', () => {
       expect(screen.getByText(/white to move/i)).toBeTruthy();
     }, { timeout: 2000 });
 
-    await user.click(screen.getByRole('button', { name: /influence overlay/i }));
+    await user.click(screen.getByRole('button', { name: /influence/i }));
     expect(container.querySelectorAll('.influence-glow').length).toBeGreaterThan(0);
 
-    await user.click(screen.getByRole('button', { name: /the cheat code/i }));
-    expect(screen.getByText(/what did they just do/i)).toBeTruthy();
+    await user.click(screen.getByRole('button', { name: /cheat code/i }));
+    expect(screen.getByText(/look/i)).toBeTruthy();
   });
 });

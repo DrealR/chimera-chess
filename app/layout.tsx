@@ -1,10 +1,15 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import Nav from '@/components/Nav';
 
 const inter = Inter({
   variable: '--font-inter',
+  subsets: ['latin'],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: '--font-space-grotesk',
   subsets: ['latin'],
 });
 
@@ -20,27 +25,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased`}>
-        <header
-          className="px-4 py-3 lg:px-8"
-          style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}
-        >
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <div className="flex items-baseline gap-3">
-              <h1 className="text-lg font-bold tracking-tight">
-                <span style={{ color: '#c8956c' }}>BeyondChess&trade;</span>
-                <span className="mx-1.5" style={{ color: '#555' }}>
-                  &times;
-                </span>
-                <span>CHIMERA</span>
-              </h1>
-              <span className="text-xs hidden sm:inline" style={{ color: '#555' }}>
-                See your creature breathe.
-              </span>
-            </div>
-            <div className="w-full sm:w-auto">
-              <Nav />
-            </div>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+        <header className="px-4 py-5 lg:px-8">
+          <div className="max-w-6xl mx-auto flex items-center justify-between">
+            <h1
+              className="text-sm font-medium tracking-tight"
+              style={{ fontFamily: 'var(--font-space-grotesk), sans-serif' }}
+            >
+              <span style={{ color: '#c8956c' }}>BeyondChess</span>
+              <span className="mx-1" style={{ color: '#333' }}>/</span>
+              <span style={{ color: '#666' }}>CHIMERA</span>
+            </h1>
+            <Nav />
           </div>
         </header>
         {children}
