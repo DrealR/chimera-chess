@@ -14,6 +14,11 @@ type BoardProps = {
   showLabels: boolean;
   onSquareClick: (row: number, col: number) => void;
   activeTool: boolean;
+  // Play-mode optional props
+  legalMoves?: Set<string>;
+  lastMove?: { from: [number, number]; to: [number, number] };
+  checkSquare?: [number, number] | null;
+  selectedSquare?: [number, number] | null;
 };
 
 function getOverlayColor(
@@ -69,6 +74,10 @@ export default function Board({
   showLabels,
   onSquareClick,
   activeTool,
+  legalMoves,
+  lastMove,
+  checkSquare,
+  selectedSquare,
 }: BoardProps) {
   const [hoveredSquare, setHoveredSquare] = useState<[number, number] | null>(null);
 
@@ -98,6 +107,11 @@ export default function Board({
           const overlay = getOverlayColor(row, col, influence, viewMode, highlightedSquares, highlightedPiecePos);
           const isHovered = hoveredSquare?.[0] === row && hoveredSquare?.[1] === col;
           const isHighlightedPiece = highlightedPiecePos?.[0] === row && highlightedPiecePos?.[1] === col;
+          const isLegalMove = legalMoves?.has(`${row},${col}`) ?? false;
+          const isLastMoveFrom = lastMove && lastMove.from[0] === row && lastMove.from[1] === col;
+          const isLastMoveTo = lastMove && lastMove.to[0] === row && lastMove.to[1] === col;
+          const isCheck = checkSquare && checkSquare[0] === row && checkSquare[1] === col;
+          const isSelected = selectedSquare && selectedSquare[0] === row && selectedSquare[1] === col;
 
           return (
             <div
@@ -105,11 +119,19 @@ export default function Board({
               className="relative flex items-center justify-center"
               style={{
                 backgroundColor: isLight ? '#d4a76a' : '#8b5e3c',
-                cursor: activeTool ? 'crosshair' : piece ? 'pointer' : 'default',
+                cursor: activeTool ? 'crosshair' : isLegalMove ? 'pointer' : piece ? 'pointer' : 'default',
               }}
               onClick={() => onSquareClick(row, col)}
               onMouseEnter={() => setHoveredSquare([row, col])}
             >
+              {/* Last move highlight */}
+              {(isLastMoveFrom || isLastMoveTo) && (
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ backgroundColor: 'rgba(240, 200, 80, 0.3)' }}
+                />
+              )}
+
               {/* Influence overlay */}
               <div
                 className="absolute inset-0 pointer-events-none transition-colors duration-150"
@@ -121,9 +143,39 @@ export default function Board({
                 <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-white/30" />
               )}
 
-              {/* Selected piece ring */}
+              {/* Selected piece ring (sandbox mode) */}
               {isHighlightedPiece && !highlightedSquares && (
                 <div className="absolute inset-0 pointer-events-none ring-2 ring-inset ring-emerald-400/60" />
+              )}
+
+              {/* Selected piece ring (play mode) */}
+              {isSelected && (
+                <div className="absolute inset-0 pointer-events-none ring-2 ring-inset" style={{ boxShadow: 'inset 0 0 0 2px rgba(80,144,255,0.7)' }} />
+              )}
+
+              {/* Check highlight */}
+              {isCheck && (
+                <div className="absolute inset-0 pointer-events-none" style={{ backgroundColor: 'rgba(255,60,60,0.45)' }} />
+              )}
+
+              {/* Legal move dot */}
+              {isLegalMove && !piece && (
+                <div
+                  className="absolute z-10 rounded-full pointer-events-none"
+                  style={{
+                    width: '26%',
+                    height: '26%',
+                    backgroundColor: 'rgba(80,200,120,0.5)',
+                  }}
+                />
+              )}
+
+              {/* Legal move capture ring */}
+              {isLegalMove && piece && (
+                <div
+                  className="absolute inset-0 pointer-events-none rounded-sm"
+                  style={{ boxShadow: 'inset 0 0 0 3px rgba(80,200,120,0.5)' }}
+                />
               )}
 
               {/* Piece */}

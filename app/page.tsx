@@ -37,7 +37,6 @@ export default function InfluenceMapPage() {
   const handleSquareClick = useCallback(
     (row: number, col: number) => {
       if (tool) {
-        // Place or erase
         setBoard((prev) => {
           const next = deepCopyBoard(prev);
           next[row][col] = tool.kind === 'eraser' ? null : { ...tool.piece };
@@ -45,7 +44,6 @@ export default function InfluenceMapPage() {
         });
         setHighlightedPiece(null);
       } else {
-        // Toggle piece highlight
         if (highlightedPiece?.[0] === row && highlightedPiece?.[1] === col) {
           setHighlightedPiece(null);
         } else if (board[row][col]) {
@@ -71,26 +69,6 @@ export default function InfluenceMapPage() {
 
   return (
     <main className="min-h-screen" style={{ backgroundColor: '#0a0a0a', color: '#e8e4df' }}>
-      {/* Header */}
-      <header
-        className="px-4 py-3 lg:px-8"
-        style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}
-      >
-        <div className="max-w-7xl mx-auto flex items-baseline gap-3">
-          <h1 className="text-lg font-bold tracking-tight">
-            <span style={{ color: '#c8956c' }}>BeyondChess&trade;</span>
-            <span className="mx-1.5" style={{ color: '#555' }}>
-              &times;
-            </span>
-            <span>CHIMERA</span>
-          </h1>
-          <span className="text-xs hidden sm:inline" style={{ color: '#555' }}>
-            See your creature breathe.
-          </span>
-        </div>
-      </header>
-
-      {/* Content */}
       <div className="max-w-7xl mx-auto px-4 py-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
           {/* Board */}
