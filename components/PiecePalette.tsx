@@ -31,7 +31,7 @@ export default function PiecePalette({ selection, onSelect, onClear }: PiecePale
       </h3>
 
       {/* White pieces */}
-      <div className="flex gap-1">
+      <div className="flex flex-wrap gap-1">
         {PIECE_TYPES.map((type) => {
           const active = isSelectedPiece(selection, 'w', type);
           return (
@@ -52,7 +52,7 @@ export default function PiecePalette({ selection, onSelect, onClear }: PiecePale
       </div>
 
       {/* Black pieces */}
-      <div className="flex gap-1">
+      <div className="flex flex-wrap gap-1">
         {PIECE_TYPES.map((type) => {
           const active = isSelectedPiece(selection, 'b', type);
           return (

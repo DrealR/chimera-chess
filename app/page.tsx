@@ -94,7 +94,7 @@ export default function InfluenceMapPage() {
       <div className="max-w-7xl mx-auto px-4 py-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
           {/* Board */}
-          <div className="flex-shrink-0 w-full max-w-[560px]">
+          <div className="flex-shrink-0 w-full max-w-[560px] mx-auto lg:mx-0">
             <Board
               board={board}
               influence={influence}
@@ -108,7 +108,7 @@ export default function InfluenceMapPage() {
           </div>
 
           {/* Sidebar */}
-          <div className="flex flex-col gap-5 min-w-[240px] max-w-[320px]">
+          <div className="flex flex-col gap-5 w-full lg:min-w-[240px] lg:max-w-[320px]">
             {/* View Mode */}
             <div className="space-y-2">
               <h3
@@ -117,7 +117,7 @@ export default function InfluenceMapPage() {
               >
                 View Mode
               </h3>
-              <div className="flex gap-1">
+              <div className="flex flex-wrap gap-1">
                 {VIEW_MODES.map(({ key, label, color }) => (
                   <button
                     key={key}
