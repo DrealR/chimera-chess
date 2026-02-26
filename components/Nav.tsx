@@ -8,6 +8,7 @@ const LINKS = [
   { href: '/play', label: 'Play' },
   { href: '/learn', label: 'Learn' },
   { href: '/curriculum', label: 'Curriculum' },
+  { href: '/cs-bridge', label: 'CS Bridge' },
 ] as const;
 
 export default function Nav() {

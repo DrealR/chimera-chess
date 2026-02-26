@@ -14,10 +14,20 @@ describe('play page', () => {
     const user = userEvent.setup();
     const { container } = render(<PlayPage />);
 
+    const grid = container.querySelector('.grid.grid-cols-8.aspect-square');
+    const squares = container.querySelectorAll('[data-square]');
+    expect(grid).toBeTruthy();
+    expect(squares.length).toBe(64);
+    for (const square of squares) {
+      expect(square.className).toContain('square-depth');
+      expect(square.className.includes('square-light') || square.className.includes('square-dark')).toBe(true);
+    }
+
     const from = container.querySelector('[data-square="6,4"]') as HTMLElement; // e2
     const to = container.querySelector('[data-square="4,4"]') as HTMLElement; // e4
 
     await user.click(from);
+    expect(container.querySelector('.selected-glow')).toBeTruthy();
     expect(to.querySelector('.legal-move-dot')).toBeTruthy();
 
     await user.click(to);
