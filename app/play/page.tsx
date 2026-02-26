@@ -24,7 +24,9 @@ export default function PlayPage() {
   const [showInfluence, setShowInfluence] = useState(false);
   const [showProtocol, setShowProtocol] = useState(false);
   const [history, setHistory] = useState<{ state: GameState; notation: string }[]>([]);
+  const [flashSquare, setFlashSquare] = useState<[number, number] | null>(null);
   const aiTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const flashTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const influence = useMemo(
     () => (showInfluence ? calculateInfluence(game.board) : createEmptyInfluence()),
@@ -48,7 +50,6 @@ export default function PlayPage() {
 
   const checkSquare = useMemo(() => {
     if (game.status !== 'check' && game.status !== 'checkmate') return null;
-    // Find current player's king
     for (let r = 0; r < 8; r++)
       for (let c = 0; c < 8; c++) {
         const p = game.board[r][c];
@@ -59,6 +60,13 @@ export default function PlayPage() {
 
   const gameOver = game.status === 'checkmate' || game.status === 'stalemate';
 
+  // Trigger a capture flash effect
+  const triggerFlash = useCallback((square: [number, number]) => {
+    if (flashTimeout.current) clearTimeout(flashTimeout.current);
+    setFlashSquare(square);
+    flashTimeout.current = setTimeout(() => setFlashSquare(null), 400);
+  }, []);
+
   // AI plays for black
   useEffect(() => {
     if (game.turn === 'b' && !gameOver) {
@@ -66,46 +74,47 @@ export default function PlayPage() {
         const aiMove = getRandomMove(game);
         if (aiMove) {
           const notation = moveToNotation(game, aiMove);
+          const isCapture = game.board[aiMove.to[0]][aiMove.to[1]] !== null || aiMove.enPassant;
           const nextGame = makeMove(game, aiMove);
           setHistory((prev) => [...prev, { state: game, notation }]);
           setGame(nextGame);
           setSelected(null);
+          if (isCapture) triggerFlash(aiMove.to);
         }
       }, 400);
     }
     return () => {
       if (aiTimeout.current) clearTimeout(aiTimeout.current);
     };
-  }, [game, gameOver]);
+  }, [game, gameOver, triggerFlash]);
 
   const handleSquareClick = useCallback(
     (row: number, col: number) => {
       if (gameOver) return;
-      if (game.turn !== 'w') return; // Wait for AI
+      if (game.turn !== 'w') return;
 
       const piece = game.board[row][col];
 
-      // If a piece is selected and this is a legal move destination
       if (selected) {
         const move = legalMovesForSelected.find(
           (m) => m.to[0] === row && m.to[1] === col,
         );
         if (move) {
-          // Auto-queen for pawn promotion (v1)
           const actualMove = move.promotion ? { ...move, promotion: 'Q' as const } : move;
           const notation = moveToNotation(game, actualMove);
+          const isCapture = game.board[row][col] !== null || actualMove.enPassant;
           const nextGame = makeMove(game, actualMove);
           setHistory((prev) => [...prev, { state: game, notation }]);
           setGame(nextGame);
           setSelected(null);
+          if (isCapture) triggerFlash([row, col]);
           return;
         }
       }
 
-      // Select a white piece
       if (piece && piece.color === 'w') {
         if (selected && selected[0] === row && selected[1] === col) {
-          setSelected(null); // Deselect
+          setSelected(null);
         } else {
           setSelected([row, col]);
         }
@@ -113,14 +122,16 @@ export default function PlayPage() {
         setSelected(null);
       }
     },
-    [game, selected, legalMovesForSelected, gameOver],
+    [game, selected, legalMovesForSelected, gameOver, triggerFlash],
   );
 
   const handleNewGame = useCallback(() => {
     if (aiTimeout.current) clearTimeout(aiTimeout.current);
+    if (flashTimeout.current) clearTimeout(flashTimeout.current);
     setGame(createInitialGame());
     setSelected(null);
     setHistory([]);
+    setFlashSquare(null);
   }, []);
 
   const handleResign = useCallback(() => {
@@ -131,7 +142,7 @@ export default function PlayPage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: '#0a0a0a', color: '#e8e4df' }}>
       <div className="max-w-7xl mx-auto px-4 py-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
           {/* Board */}
           <div className="flex-shrink-0 w-full max-w-[560px] mx-auto lg:mx-0">
             <Board
@@ -147,11 +158,12 @@ export default function PlayPage() {
               lastMove={lastMove}
               checkSquare={checkSquare}
               selectedSquare={selected}
+              flashSquare={flashSquare}
             />
           </div>
 
           {/* Sidebar */}
-          <div className="w-full lg:min-w-[240px] lg:max-w-[320px]">
+          <div className="w-full lg:min-w-[260px] lg:max-w-[320px]">
             <GamePanel
               game={game}
               history={history}
@@ -164,6 +176,38 @@ export default function PlayPage() {
             />
           </div>
         </div>
+
+        {/* Checkmate / Stalemate overlay */}
+        {gameOver && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.7)' }}>
+            <div className="checkmate-overlay glass-panel p-8 text-center max-w-md mx-4">
+              <div
+                className="text-3xl font-bold mb-2"
+                style={{ color: game.status === 'checkmate' ? '#f0a050' : '#888' }}
+              >
+                {game.status === 'checkmate' ? 'Checkmate' : 'Stalemate'}
+              </div>
+              <div className="text-sm mb-6" style={{ color: '#aaa' }}>
+                {game.status === 'checkmate'
+                  ? game.turn === 'w'
+                    ? 'Black wins the game!'
+                    : 'White wins the game!'
+                  : 'The game is a draw.'}
+              </div>
+              <button
+                className="px-6 py-3 rounded-lg text-sm font-semibold"
+                style={{
+                  backgroundColor: 'rgba(80,200,120,0.15)',
+                  color: '#50c878',
+                  border: '1px solid rgba(80,200,120,0.2)',
+                }}
+                onClick={handleNewGame}
+              >
+                Play Again
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </main>
   );
