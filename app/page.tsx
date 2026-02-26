@@ -78,7 +78,7 @@ export default function InfluenceMapPage() {
       >
         <div className="max-w-7xl mx-auto flex items-baseline gap-3">
           <h1 className="text-lg font-bold tracking-tight">
-            <span style={{ color: '#c8956c' }}>BeyondChess</span>
+            <span style={{ color: '#c8956c' }}>BeyondChess&trade;</span>
             <span className="mx-1.5" style={{ color: '#555' }}>
               &times;
             </span>
@@ -181,9 +181,7 @@ export default function InfluenceMapPage() {
 
             {/* Footer credit */}
             <div className="text-[0.6rem] pt-4" style={{ color: '#444', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-              BeyondChess&trade; &times; CHIMERA &mdash; Coach Lamont &times; Deji
-              <br />
-              Working Wonders Starting Home Inc. &bull; 2026
+              Coach Lamont &times; Deji &middot; Working Wonders Starting Home Inc. &middot; 2026
             </div>
           </div>
         </div>

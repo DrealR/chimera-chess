@@ -8,9 +8,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'BeyondChess \u00d7 CHIMERA | Influence Map',
-  description:
-    'See your creature breathe. Interactive chess influence map and teaching tool.',
+  title: 'BeyondChess\u2122 \u00d7 CHIMERA',
+  description: 'See your creature breathe.',
 };
 
 export default function RootLayout({
