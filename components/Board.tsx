@@ -135,7 +135,7 @@ export default function Board({
 
           {/* Grid */}
           <div
-            className="grid grid-cols-8 aspect-square flex-1 overflow-hidden select-none relative z-[1]"
+            className="grid grid-cols-8 aspect-square w-full flex-1 overflow-hidden select-none relative z-[1]"
             onMouseLeave={() => setHoveredSquare(null)}
           >
             {Array.from({ length: 64 }, (_, i) => {
